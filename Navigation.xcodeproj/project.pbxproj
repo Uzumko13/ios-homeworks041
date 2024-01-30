@@ -13,6 +13,7 @@
 		DD293B5B2B698F1000DAA167 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD293B5A2B698F1000DAA167 /* Assets.xcassets */; };
 		DD293B5E2B698F1000DAA167 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD293B5C2B698F1000DAA167 /* LaunchScreen.storyboard */; };
 		DD293B662B6991EF00DAA167 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD293B652B6991EF00DAA167 /* FeedViewController.swift */; };
+		DD293B682B69924A00DAA167 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD293B672B69924A00DAA167 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		DD293B5D2B698F1000DAA167 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD293B5F2B698F1000DAA167 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD293B652B6991EF00DAA167 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		DD293B672B69924A00DAA167 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				DD293B5C2B698F1000DAA167 /* LaunchScreen.storyboard */,
 				DD293B5F2B698F1000DAA167 /* Info.plist */,
 				DD293B652B6991EF00DAA167 /* FeedViewController.swift */,
+				DD293B672B69924A00DAA167 /* ProfileViewController.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -139,6 +142,7 @@
 			files = (
 				DD293B562B698F0F00DAA167 /* ViewController.swift in Sources */,
 				DD293B522B698F0F00DAA167 /* AppDelegate.swift in Sources */,
+				DD293B682B69924A00DAA167 /* ProfileViewController.swift in Sources */,
 				DD293B662B6991EF00DAA167 /* FeedViewController.swift in Sources */,
 				DD293B542B698F0F00DAA167 /* SceneDelegate.swift in Sources */,
 			);
