@@ -20,7 +20,7 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .Gray
+        view.backgroundColor = .gray
         
         view.addSubview(actionButton)
         
