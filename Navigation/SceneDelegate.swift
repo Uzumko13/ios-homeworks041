@@ -14,9 +14,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)
         
         let feedViewController = FeedViewController()
-        feedViewController.title = "Feed"
+        feedViewController.title = "Лента"
         let profileViewController = ProfileViewController()
-        profileViewController.title = "Profile"
+        profileViewController.title = "Профиль"
         let postViewController = PostViewController()
         
         _ = UINavigationController(rootViewController: feedViewController)
