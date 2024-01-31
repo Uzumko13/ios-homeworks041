@@ -12,7 +12,7 @@ class ProfileViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        var profileHeaderView = ProfileHeaderView()
+        let profileHeaderView = ProfileHeaderView()
         
         view.addSubview(profileHeaderView)
         

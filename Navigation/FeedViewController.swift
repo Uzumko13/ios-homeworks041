@@ -20,6 +20,7 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        title = "Лента"
         view.backgroundColor = .gray
         
         view.addSubview(actionButton)
