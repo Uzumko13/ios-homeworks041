@@ -8,4 +8,14 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = .lightGray
         
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        var profileHeaderView = ProfileHeaderView()
+        
+        view.addSubview(profileHeaderView)
+        
+        profileHeaderView.frame = 
+    }
 }
