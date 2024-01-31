@@ -16,6 +16,7 @@ class ProfileViewController: UIViewController {
         
         view.addSubview(profileHeaderView)
         
-        profileHeaderView.frame = 
+        profileHeaderView.frame = view.frame
+        
     }
 }
