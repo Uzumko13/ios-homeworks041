@@ -1,20 +1,15 @@
 import UIKit
 
 class ProfileHeaderView: UIView {
-    var name = UILabel()
-    var label = UILabel()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.addSubview()
-    }
+    private lazy var imageCat: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "Dog")
+        image.contentMode = .scaleToFill
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image
+        return image
+    }()
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func myCustomView() {
-        label.frame = 
-    }
 }
 

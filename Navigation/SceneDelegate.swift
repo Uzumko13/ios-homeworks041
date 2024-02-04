@@ -39,8 +39,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                                         image: UIImage(systemName: "person"),
                                                         tag: 1)
         tabBarController.tabBar.isTranslucent = false
-        tabBarController.tabBar.tintColor = UIColor(red: 0.7, green: 0.5, blue: 0.5, alpha: 1)
-        tabBarController.tabBar.unselectedItemTintColor = UIColor(red: 0.5, green: 0.7, blue: 0.5, alpha: 1)
+        tabBarController.tabBar.tintColor = UIColor(red: 0.6, green: 0.5, blue: 0.5, alpha: 1)
+        tabBarController.tabBar.unselectedItemTintColor = UIColor(red: 0.5, green: 0.6, blue: 0.5, alpha: 1)
         tabBarController.tabBar.backgroundColor = UIColor(white: 1, alpha: 0.9)
         
         window.rootViewController = tabBarController
