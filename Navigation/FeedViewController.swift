@@ -47,10 +47,8 @@ class FeedViewController: UIViewController {
         
         let postViewController = PostViewController()
         
-        postViewController.titlePost = post.title
-        
         self.navigationController?.pushViewController(postViewController, animated: true)
-        
+        postViewController.titlePost = post.title
         self.navigationItem.title = postViewController.titlePost
     }
 }
