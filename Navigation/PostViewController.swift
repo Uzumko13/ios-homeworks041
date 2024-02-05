@@ -11,7 +11,6 @@ class PostViewController: UIViewController {
         button.setTitleColor(.systemBlue, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         
-        
         return button
     }()
     

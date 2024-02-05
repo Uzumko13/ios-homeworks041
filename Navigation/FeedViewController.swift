@@ -11,7 +11,6 @@ class FeedViewController: UIViewController {
         button.setTitleColor(.systemOrange, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
         
-        
         return button
     }()
     

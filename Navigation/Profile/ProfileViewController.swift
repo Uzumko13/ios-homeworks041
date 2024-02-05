@@ -2,7 +2,12 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    let profileHeaderView = ProfileHeaderView()
+    private lazy var profileHeaderView: ProfileHeaderView = {
+        let view = ProfileHeaderView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
