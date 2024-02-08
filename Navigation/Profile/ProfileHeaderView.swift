@@ -2,7 +2,7 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
-    private var statusText = "Готов помочь"
+    private var statusText = "Готов помочь..."
     
     //MARK: Visual objects
     
@@ -22,7 +22,7 @@ class ProfileHeaderView: UIView {
     var statusButton: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .blue
-        btn.setTitle("Show status", for: .normal)
+        btn.setTitle("Показать статус", for: .normal)
         btn.setTitleColor(.white, for: .normal)
         btn.layer.cornerRadius = 4
         btn.layer.shadowOffset = CGSize(width: 4, height: 4)
@@ -30,7 +30,6 @@ class ProfileHeaderView: UIView {
         btn.layer.shadowColor = UIColor.black.cgColor
         btn.layer.shadowOpacity = 0.7
         btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        btn.addTarget(ProfileHeaderView.self, action: #selector(statusButtonPressed), for: .touchUpInside)
         btn.translatesAutoresizingMaskIntoConstraints = false
             
         return btn
@@ -40,7 +39,7 @@ class ProfileHeaderView: UIView {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.textColor = .black
-        label.text = "Dog Name"
+        label.text = "Fox"
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
             
@@ -73,12 +72,15 @@ class ProfileHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+    
         
         setupAvatarConstraint()
         setupNameLabelConstraint()
         setupStatusLabel()
         setupStatusTextFieldConstraint()
         setupStatusButton()
+        
+        statusTextField.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -135,12 +137,13 @@ class ProfileHeaderView: UIView {
     }
     
     private func setupStatusButton() {
+        statusButton.addTarget(ProfileHeaderView.self, action: #selector(statusButtonPressed), for: .touchUpInside)
         addSubview(statusButton)
         NSLayoutConstraint.activate([
             statusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16),
             statusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
             statusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            statusButton.heightAnchor.constraint(equalToConstant: 48)
+            statusButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
