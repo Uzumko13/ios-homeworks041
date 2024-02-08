@@ -2,7 +2,7 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
-    private var statusText = "Готов помочь..."
+    var statusText = "Статус..."
     
     //MARK: Visual objects
     
@@ -22,7 +22,7 @@ class ProfileHeaderView: UIView {
     var statusButton: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .blue
-        btn.setTitle("Показать статус", for: .normal)
+        btn.setTitle("Установить статус", for: .normal)
         btn.setTitleColor(.white, for: .normal)
         btn.layer.cornerRadius = 4
         btn.layer.shadowOffset = CGSize(width: 4, height: 4)
@@ -125,7 +125,7 @@ class ProfileHeaderView: UIView {
         statusTextField.layer.cornerRadius = 12
         statusTextField.layer.borderWidth = 1
         statusTextField.layer.borderColor = UIColor.black.cgColor
-        statusTextField.attributedPlaceholder = NSAttributedString.init(string: "Готово...", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        statusTextField.attributedPlaceholder = NSAttributedString.init(string: "Новый статус...", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         addSubview(statusTextField)
         NSLayoutConstraint.activate([
@@ -137,7 +137,7 @@ class ProfileHeaderView: UIView {
     }
     
     private func setupStatusButton() {
-        statusButton.addTarget(ProfileHeaderView.self, action: #selector(statusButtonPressed), for: .touchUpInside)
+        statusButton.addTarget(self, action: #selector(statusButtonPressed), for: .touchUpInside)
         addSubview(statusButton)
         NSLayoutConstraint.activate([
             statusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16),
