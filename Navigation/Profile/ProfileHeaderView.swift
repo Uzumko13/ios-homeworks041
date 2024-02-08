@@ -51,7 +51,6 @@ class ProfileHeaderView: UIView {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = .gray
-        label.text = "Waiting for something..."
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
             
@@ -65,6 +64,7 @@ class ProfileHeaderView: UIView {
         statusTextField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         statusTextField.textColor = .black
         statusTextField.backgroundColor = .white
+        
         
         return statusTextField
     }()
@@ -106,6 +106,7 @@ class ProfileHeaderView: UIView {
     }
     
     private func setupStatusLabel() {
+        statusLabel.text = statusText
         addSubview(statusLabel)
         NSLayoutConstraint.activate([
             statusLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 16),
@@ -123,6 +124,7 @@ class ProfileHeaderView: UIView {
         statusTextField.layer.borderWidth = 1
         statusTextField.layer.borderColor = UIColor.black.cgColor
         statusTextField.attributedPlaceholder = NSAttributedString.init(string: "Готово...", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         addSubview(statusTextField)
         NSLayoutConstraint.activate([
             statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 16),
@@ -152,3 +154,11 @@ class ProfileHeaderView: UIView {
     }
 }
 
+
+extension ProfileHeaderView: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
