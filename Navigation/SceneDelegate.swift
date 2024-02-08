@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         _ = UINavigationController(rootViewController: feedViewController)
         _ = UINavigationController(rootViewController: profileViewController)
         _ = UINavigationController(rootViewController: postViewController)
-        
+
         let tabBarController = UITabBarController()
         
         let controllers = [feedViewController,
