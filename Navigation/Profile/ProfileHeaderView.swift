@@ -2,6 +2,7 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
+    private var statusText = "Готов помочь"
     
     //MARK: Visual objects
     
@@ -142,8 +143,12 @@ class ProfileHeaderView: UIView {
     }
     
     
+    @objc private func statusTextChanged(_ textField: UITextField) {
+        statusText = textField.text ?? ""
+    }
+    
     @objc private func statusButtonPressed() {
-        statusLabel.text = "statusText"
+        statusLabel.text = statusText
     }
 }
 
