@@ -18,15 +18,11 @@ class ProfileViewController: UIViewController {
         view.addSubview(self.profileHeaderView)
         
         setupConstraint()
-        viewWillLayoutSubviews()
         
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
-        profileHeaderView.frame = view.frame
-        
     }
     
     private func setupConstraint() {
@@ -34,7 +30,7 @@ class ProfileViewController: UIViewController {
             self.profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             self.profileHeaderView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             self.profileHeaderView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            self.profileHeaderView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            self.profileHeaderView.heightAnchor.constraint(equalToConstant: 220)
         ])
     }
 }
