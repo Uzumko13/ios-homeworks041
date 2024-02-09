@@ -67,7 +67,6 @@ final class ProfileHeaderView: UIView {
         return statusTextField
     }()
     
-    
     //MARK: Initial
     
     override init(frame: CGRect) {
@@ -126,8 +125,7 @@ final class ProfileHeaderView: UIView {
             statusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16),
             statusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
             statusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            statusButton.heightAnchor.constraint(equalToConstant: 50),
-            
+            statusButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
