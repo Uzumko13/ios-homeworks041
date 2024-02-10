@@ -81,6 +81,8 @@ final class ProfileHeaderView: UIView {
         fatalError("LoL")
     }
     
+    //MARK: Setup metohd
+    
     private func setupConstraint() {
         addSubview(fullNameLabel)
         addSubview(avatar)
@@ -138,6 +140,7 @@ final class ProfileHeaderView: UIView {
     }
 }
 
+    //MARK: Extention
 
 extension ProfileHeaderView: UITextFieldDelegate {
     
