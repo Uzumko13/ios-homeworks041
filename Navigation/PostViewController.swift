@@ -2,7 +2,7 @@ import UIKit
 
 class PostViewController: UIViewController {
     
-    var titlePost = "NewsPost"
+    var post: Post?
     
     override func viewDidLoad() {
         super.viewDidLoad()
