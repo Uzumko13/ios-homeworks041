@@ -2,11 +2,14 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    private lazy var profileHeaderView: ProfileHeaderView = {
-        let view = ProfileHeaderView()
-        view.translatesAutoresizingMaskIntoConstraints = false
+    static let headerIdent = "header"
+    
+    static var postTableView: UITableView = {
+        let table = UITableView(frame: .zero, style: .grouped)
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.register(ProfileHeaderView.self, forCellReuseIdentifier: headerIdent)
         
-        return view
+        return table
     }()
     
     override func viewDidLoad() {
@@ -14,25 +17,26 @@ class ProfileViewController: UIViewController {
 
         view.backgroundColor = .lightGray
         
-        view.addSubview(self.profileHeaderView)
-        
+        view.addSubview(Self.postTableView)
         setupConstraint()
+        Self.postTableView.dataSource = self
         
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+        
     }
     
     private func setupConstraint() {
         NSLayoutConstraint.activate([
-            self.profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            self.profileHeaderView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            self.profileHeaderView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            self.profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
-            
+            Self.postTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            Self.postTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            Self.postTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            Self.postTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }
 
+    //MARK: Extention
 
+extension ProfileViewController: UITableViewDelegate {
+    
+    func 
+}

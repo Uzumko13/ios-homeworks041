@@ -23,6 +23,7 @@ class InfoViewController: UIViewController {
         showAlert()
     }
 }
+    //MARK: Extention
 
 extension InfoViewController {
     func showAlert() {

@@ -10,6 +10,8 @@
 		DD17129E2B774BF30086284A /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD17129D2B774BF30086284A /* LogInViewController.swift */; };
 		DD1712A12B77B8A80086284A /* ExtentionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1712A02B77B8A80086284A /* ExtentionUIImage.swift */; };
 		DD1712A32B7807400086284A /* LayoutContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1712A22B7807400086284A /* LayoutContent.swift */; };
+		DD1712A52B7916180086284A /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1712A42B7916180086284A /* PostTableViewCell.swift */; };
+		DD1712A92B791A2E0086284A /* ExamplePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1712A82B791A2E0086284A /* ExamplePost.swift */; };
 		DD293B522B698F0F00DAA167 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD293B512B698F0F00DAA167 /* AppDelegate.swift */; };
 		DD293B542B698F0F00DAA167 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD293B532B698F0F00DAA167 /* SceneDelegate.swift */; };
 		DD293B562B698F0F00DAA167 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD293B552B698F0F00DAA167 /* ViewController.swift */; };
@@ -27,6 +29,8 @@
 		DD17129D2B774BF30086284A /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		DD1712A02B77B8A80086284A /* ExtentionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtentionUIImage.swift; sourceTree = "<group>"; };
 		DD1712A22B7807400086284A /* LayoutContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutContent.swift; sourceTree = "<group>"; };
+		DD1712A42B7916180086284A /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		DD1712A82B791A2E0086284A /* ExamplePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplePost.swift; sourceTree = "<group>"; };
 		DD293B4E2B698F0F00DAA167 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD293B512B698F0F00DAA167 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD293B532B698F0F00DAA167 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,8 +62,17 @@
 			children = (
 				DD1712A02B77B8A80086284A /* ExtentionUIImage.swift */,
 				DD1712A22B7807400086284A /* LayoutContent.swift */,
+				DD1712A62B7919E50086284A /* Lybrary */,
 			);
 			path = Extention;
+			sourceTree = "<group>";
+		};
+		DD1712A62B7919E50086284A /* Lybrary */ = {
+			isa = PBXGroup;
+			children = (
+				DD1712A82B791A2E0086284A /* ExamplePost.swift */,
+			);
+			path = Lybrary;
 			sourceTree = "<group>";
 		};
 		DD293B452B698F0F00DAA167 = {
@@ -100,6 +113,7 @@
 		DD293B6F2B6A1AA900DAA167 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				DD1712A42B7916180086284A /* PostTableViewCell.swift */,
 				DD17129D2B774BF30086284A /* LogInViewController.swift */,
 				DD293B672B69924A00DAA167 /* ProfileViewController.swift */,
 				DD293B702B6A1AD900DAA167 /* ProfileHeaderView.swift */,
@@ -179,9 +193,11 @@
 			files = (
 				DD293B6A2B69929700DAA167 /* PostViewController.swift in Sources */,
 				DD293B562B698F0F00DAA167 /* ViewController.swift in Sources */,
+				DD1712A52B7916180086284A /* PostTableViewCell.swift in Sources */,
 				DD293B522B698F0F00DAA167 /* AppDelegate.swift in Sources */,
 				DD1712A32B7807400086284A /* LayoutContent.swift in Sources */,
 				DD293B682B69924A00DAA167 /* ProfileViewController.swift in Sources */,
+				DD1712A92B791A2E0086284A /* ExamplePost.swift in Sources */,
 				DD293B712B6A1AD900DAA167 /* ProfileHeaderView.swift in Sources */,
 				DD293B662B6991EF00DAA167 /* FeedViewController.swift in Sources */,
 				DD293B6C2B69931D00DAA167 /* Post.swift in Sources */,
