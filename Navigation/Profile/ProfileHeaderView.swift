@@ -30,6 +30,7 @@ final class ProfileHeaderView: UIView {
         btn.layer.shadowColor = UIColor.black.cgColor
         btn.layer.shadowOpacity = 0.7
         btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        btn.addTarget(ProfileHeaderView.self, action: #selector(statusButtonPressed), for: .touchUpInside)
         btn.translatesAutoresizingMaskIntoConstraints = false
             
         return btn
@@ -62,7 +63,14 @@ final class ProfileHeaderView: UIView {
         statusTextField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         statusTextField.textColor = .black
         statusTextField.backgroundColor = .white
-        
+        let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
+        statusTextField.leftView = paddingView
+        statusTextField.leftViewMode = .always
+        statusTextField.layer.cornerRadius = 12
+        statusTextField.layer.borderWidth = 1
+        statusTextField.layer.borderColor = UIColor.black.cgColor
+        statusTextField.placeholder = "Новый статус..."
+        statusTextField.addTarget(ProfileHeaderView.self, action: #selector(statusTextChanged), for: .editingChanged)
         
         return statusTextField
     }()
@@ -71,6 +79,11 @@ final class ProfileHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        addSubview(fullNameLabel)
+        addSubview(avatar)
+        addSubview(statusLabel)
+        addSubview(statusTextField)
+        addSubview(statusButton)
     
         setupConstraint()
         
@@ -84,25 +97,6 @@ final class ProfileHeaderView: UIView {
     //MARK: Setup metohd
     
     private func setupConstraint() {
-        addSubview(fullNameLabel)
-        addSubview(avatar)
-        
-        statusLabel.text = statusText
-        addSubview(statusLabel)
-        
-        let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
-        statusTextField.leftView = paddingView
-        statusTextField.leftViewMode = .always
-        statusTextField.layer.cornerRadius = 12
-        statusTextField.layer.borderWidth = 1
-        statusTextField.layer.borderColor = UIColor.black.cgColor
-        statusTextField.placeholder = "Новый статус..."
-        statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
-        addSubview(statusTextField)
-        
-        statusButton.addTarget(self, action: #selector(statusButtonPressed), for: .touchUpInside)
-        addSubview(statusButton)
-        
         NSLayoutConstraint.activate([
             fullNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
             fullNameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 156),
