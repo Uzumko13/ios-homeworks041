@@ -79,8 +79,8 @@ final class ProfileHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupConstraint()
         setupAddSubview()
+        setupConstraint()
         statusTextField.delegate = self
     }
     
@@ -102,27 +102,27 @@ final class ProfileHeaderView: UIView {
         NSLayoutConstraint.activate([
             fullNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
             fullNameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 156),
-            fullNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: LayoutConstants.trailingMargin),
+            fullNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
             fullNameLabel.heightAnchor.constraint(equalToConstant: 28),
             
-            avatar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: LayoutConstants.indent),
-            avatar.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: LayoutConstants.leadingMargin),
+            avatar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            avatar.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
             avatar.widthAnchor.constraint(equalToConstant: 128),
             avatar.heightAnchor.constraint(equalTo: avatar.widthAnchor),
             
-            statusLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: LayoutConstants.indent),
+            statusLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 16),
             statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
             statusLabel.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor),
             statusLabel.heightAnchor.constraint(equalTo: fullNameLabel.heightAnchor),
             
-            statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: LayoutConstants.indent),
+            statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 16),
             statusTextField.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
             statusTextField.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor),
             statusTextField.heightAnchor.constraint(equalToConstant: 40),
             
-            statusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: LayoutConstants.indent),
-            statusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: LayoutConstants.leadingMargin),
-            statusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: LayoutConstants.trailingMargin),
+            statusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16),
+            statusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            statusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
             statusButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }

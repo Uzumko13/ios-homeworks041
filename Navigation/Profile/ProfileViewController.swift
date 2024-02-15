@@ -20,10 +20,6 @@ class ProfileViewController: UIViewController {
         
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-    }
-    
     private func setupConstraint() {
         NSLayoutConstraint.activate([
             self.profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
