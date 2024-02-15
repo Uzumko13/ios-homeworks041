@@ -8,7 +8,7 @@ final class ProfileHeaderView: UIView {
     
     var avatar: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "Dog")
+        image.image = UIImage(named: "dog")
         image.contentMode = .scaleToFill
         image.translatesAutoresizingMaskIntoConstraints = false
         image.layer.borderWidth = 3.0
@@ -91,7 +91,7 @@ final class ProfileHeaderView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("LoL")
+        fatalError("Error")
     }
     
     //MARK: Setup metohd
