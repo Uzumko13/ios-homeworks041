@@ -49,6 +49,7 @@ final class ProfileHeaderView: UIView {
         
     var statusLabel: UILabel = {
         let label = UILabel()
+        label.text = "Статус..."
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = .gray
         label.numberOfLines = 0
