@@ -21,7 +21,7 @@ final class ProfileHeaderView: UIView {
         
     var statusButton: UIButton = {
         let btn = UIButton()
-        btn.backgroundColor = .blue
+        btn.backgroundColor = UIColor(named: "VkColor")
         btn.setTitle("Установить статус", for: .normal)
         btn.setTitleColor(.white, for: .normal)
         btn.layer.cornerRadius = 4
