@@ -18,8 +18,35 @@ final class ProfileHeaderView: UIView {
         
         return image
     }()
+    var statusLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.textColor = .gray
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+            
+        return label
+    }()
+    
+    lazy var statusTextField: UITextField = {
+        let statusTextField = UITextField()
+        statusTextField.translatesAutoresizingMaskIntoConstraints = false
+        statusTextField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        statusTextField.textColor = .black
+        statusTextField.backgroundColor = .white
+        let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
+        statusTextField.leftView = paddingView
+        statusTextField.leftViewMode = .always
+        statusTextField.layer.cornerRadius = 12
+        statusTextField.layer.borderWidth = 1
+        statusTextField.layer.borderColor = UIColor.black.cgColor
+        statusTextField.placeholder = "Новый статус..."
+        statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         
-    var statusButton: UIButton = {
+        return statusTextField
+    }()
+        
+    lazy var statusButton: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = UIColor(named: "VkColor")
         btn.setTitle("Установить статус", for: .normal)
@@ -30,7 +57,7 @@ final class ProfileHeaderView: UIView {
         btn.layer.shadowColor = UIColor.black.cgColor
         btn.layer.shadowOpacity = 0.7
         btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        btn.addTarget(ProfileHeaderView.self, action: #selector(statusButtonPressed), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(statusButtonPressed), for: .touchUpInside)
         btn.translatesAutoresizingMaskIntoConstraints = false
             
         return btn
@@ -46,34 +73,8 @@ final class ProfileHeaderView: UIView {
             
         return label
     }()
-        
-    var statusLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.textColor = .gray
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-            
-        return label
-    }()
     
-    var statusTextField: UITextField = {
-        let statusTextField = UITextField()
-        statusTextField.translatesAutoresizingMaskIntoConstraints = false
-        statusTextField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        statusTextField.textColor = .black
-        statusTextField.backgroundColor = .white
-        let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
-        statusTextField.leftView = paddingView
-        statusTextField.leftViewMode = .always
-        statusTextField.layer.cornerRadius = 12
-        statusTextField.layer.borderWidth = 1
-        statusTextField.layer.borderColor = UIColor.black.cgColor
-        statusTextField.placeholder = "Новый статус..."
-        statusTextField.addTarget(ProfileHeaderView.self, action: #selector(statusTextChanged), for: .editingChanged)
-        
-        return statusTextField
-    }()
+    
     
     //MARK: Initial
     
@@ -99,6 +100,7 @@ final class ProfileHeaderView: UIView {
     }
     
     private func setupConstraint() {
+        statusLabel.text = statusText
         NSLayoutConstraint.activate([
             fullNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
             fullNameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 156),
