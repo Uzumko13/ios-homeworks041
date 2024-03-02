@@ -16,17 +16,17 @@ class ProfileViewController: UIViewController {
         
         view.addSubview(self.profileHeaderView)
         
-        setupConstraint()
+        setupConstraints()
         
     }
     
-    private func setupConstraint() {
+    private func setupConstraints() {
+        let safeAreaGuide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            self.profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            self.profileHeaderView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            self.profileHeaderView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            self.profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
-            
+            self.profileHeaderView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
+            self.profileHeaderView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
+            self.profileHeaderView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
+            self.profileHeaderView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor)
         ])
     }
 }
