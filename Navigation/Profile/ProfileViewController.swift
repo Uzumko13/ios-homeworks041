@@ -2,11 +2,17 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    private lazy var profileHeaderView: ProfileHeaderView = {
-        let view = ProfileHeaderView()
+    static let headerId = "header"
+    static let postId = "post"
+    
+    private lazy var postTableView: UITableView = {
+        let table = UITableView.init(
+            frame: .zero,
+            style: .grouped
+        )
         view.translatesAutoresizingMaskIntoConstraints = false
         
-        return view
+        return table
     }()
     
     override func viewDidLoad() {
@@ -14,19 +20,29 @@ class ProfileViewController: UIViewController {
 
         view.backgroundColor = .lightGray
         
-        view.addSubview(self.profileHeaderView)
+        view.addSubview(postTableView)
         
         setupConstraints()
         
     }
     
+    private func tuneTableView() {
+        postTableView.rowHeight = UITableView.automaticDimension
+        
+        let headerView = ProfileHeaderView()
+        postTableView.register(ProfileHeaderView.self,
+                               forHeaderFooterViewReuseIdentifier: ProfileViewController.headerId)
+        postTableView.register(PostTableViewCell.self,
+                               forCellReuseIdentifier: ProfileViewController.postId)
+    }
+    
     private func setupConstraints() {
         let safeAreaGuide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            self.profileHeaderView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
-            self.profileHeaderView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
-            self.profileHeaderView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
-            self.profileHeaderView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor)
+            self.postTableView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
+            self.postTableView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
+            self.postTableView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
+            self.postTableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor)
         ])
     }
 }
