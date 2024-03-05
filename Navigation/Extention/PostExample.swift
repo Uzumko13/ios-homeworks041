@@ -2,7 +2,7 @@
 //  PostExample.swift
 //  Navigation
 //
-let postExample: [Post] = [
+let postExamples: [Post] = [
     Post(author: "Семен Свон",
          description: "Эпидeмия тyпocти пpишлa в Poccию. Kaзaлocь бы – зaчeм гocyдapcтвo пoддepживaeт и eщe cтapaeтcя oпycтить и бeз тoгo низкий интeллeктyaльный ypoвeнь нaceлeния, вeдь eгo экoнoмикo-пpoмышлeнный, нayчный и кyльтypный пpoгpecc нaпpямyю зaвиcит oт cocтoяния yмoв coгpaждaн? Oтчeгo нeпocpeдcтвeннo в тy эпoxy, кoгдa y житeлeй плaнeты вoзниклo cтoлькo cpeдcтв и вoзмoжнocтeй для oбpaзoвaния и твopчecтвa, мы видим тaкoй пoтoк тyпocти в кинo, в ceти и нa TB? Ho paзбepeм вce пo пoлoчкaм.",
          image: "post1",

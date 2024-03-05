@@ -23,7 +23,7 @@ class ProfileViewController: UIViewController {
         view.addSubview(postTableView)
         
         setupConstraints()
-        
+        tuneTableView()
     }
     
     private func tuneTableView() {
@@ -34,6 +34,9 @@ class ProfileViewController: UIViewController {
                                forHeaderFooterViewReuseIdentifier: ProfileViewController.headerId)
         postTableView.register(PostTableViewCell.self,
                                forCellReuseIdentifier: ProfileViewController.postId)
+        
+        postTableView.dataSource = self
+        postTableView.delegate = self
     }
     
     private func setupConstraints() {
@@ -45,4 +48,31 @@ class ProfileViewController: UIViewController {
             self.postTableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor)
         ])
     }
+    @objc func reloadTableView() {
+        postTableView.reloadData()
+        postTableView.refreshControl?.endRefreshing()
+    }
+}
+
+
+
+extension ProfileViewController: UITableViewDataSource {
+    func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int)
+    -> Int {
+        1
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath)
+    -> UITableViewCell {
+        <#code#>
+    }
+    
+}
+
+extension ProfileViewController: UITableViewDelegate {
+    
 }

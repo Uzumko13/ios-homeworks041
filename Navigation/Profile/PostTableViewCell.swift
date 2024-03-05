@@ -2,13 +2,12 @@
 import UIKit
 
 class PostTableViewCell: UITableViewCell {
-//    let author: String
-//    let description: String
-//    let image: String
-//    let likes: Int
-//    let views: Int
     
-    var postAutor: UILabel = {
+    private var viewsCounter = 0
+    
+    // MARK: Visual objects
+    
+    var postAuthor: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 20, weight: .bold)
@@ -49,4 +48,61 @@ class PostTableViewCell: UITableViewCell {
         label.textColor = .black
         return label
     }()
+    
+    // MARK: Init
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.addSubview(postAuthor)
+        contentView.addSubview(postImage)
+        contentView.addSubview(postDescription)
+        contentView.addSubview(postLikes)
+        contentView.addSubview(postViews)
+        setupConstraints()
+        self.selectionStyle = .default
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("Код не был реализован")
+    }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            postAuthor.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutConstants.indent),
+            postAuthor.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.leadingMargin),
+            postAuthor.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: LayoutConstants.trailingMargin),
+
+            postImage.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            postImage.heightAnchor.constraint(equalTo: postImage.widthAnchor, multiplier: 0.56),
+            postImage.topAnchor.constraint(equalTo: postAuthor.bottomAnchor, constant: LayoutConstants.indent),
+
+            postDescription.topAnchor.constraint(equalTo: postImage.bottomAnchor, constant: LayoutConstants.indent),
+            postDescription.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.leadingMargin),
+            postDescription.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: LayoutConstants.trailingMargin),
+
+            postLikes.topAnchor.constraint(equalTo: postDescription.bottomAnchor, constant: LayoutConstants.indent),
+            postLikes.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.leadingMargin),
+            postLikes.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: LayoutConstants.indentMinus),
+
+            postViews.topAnchor.constraint(equalTo: postDescription.bottomAnchor, constant: LayoutConstants.indent),
+            postViews.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: LayoutConstants.trailingMargin),
+            postViews.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: LayoutConstants.indentMinus)
+        ])
+    }
+    
+    //MARK: Run metohd
+    
+    func configPostArray(post: Post) {
+        postAuthor.text = post.author
+        postDescription.text = post.description
+        postImage.image = UIImage(named: post.image)
+        postLikes.text = "Лайки: \(post.likes)"
+        viewsCounter = post.views
+        postViews.text = "Просмотры: \(viewsCounter)"
+    }
+    
+    func incrementPostViewsCounter() {
+        viewsCounter += 1
+        postViews.text = "Просмотры: \(viewsCounter)"
+    }
 }
