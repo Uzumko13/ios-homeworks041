@@ -82,7 +82,7 @@ final class ProfileHeaderView: UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         setupAddSubview()
-        setupConstraint()
+        setupConstraints()
         statusTextField.delegate = self
     }
     
@@ -100,7 +100,7 @@ final class ProfileHeaderView: UITableViewHeaderFooterView {
         addSubview(statusButton)
     }
     
-    private func setupConstraint() {
+    private func setupConstraints() {
         statusLabel.text = statusText
         NSLayoutConstraint.activate([
             fullNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
