@@ -47,7 +47,10 @@ class ProfileViewController: UIViewController {
         
         postTableView.dataSource = self
         postTableView.delegate = self
+        postTableView.refreshControl = UIRefreshControl()
+        postTableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
     }
+    
     
     private func setupConstraints() {
         let safeAreaGuide = view.safeAreaLayoutGuide
@@ -68,6 +71,8 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UITableViewDataSource {
     
+
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 1
@@ -78,11 +83,8 @@ extension ProfileViewController: UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = postTableView.dequeueReusableCell(withIdentifier: postId, for: indexPath) as? PostTableViewCell else { fatalError() }
-        cell.configPostArray(post: postExamples[indexPath.row])
-        
-        return cell
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
     
 }
@@ -102,9 +104,23 @@ extension ProfileViewController: UITableViewDelegate {
         
         return headerView
     }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = postTableView.dequeueReusableCell(withIdentifier: postId, for: indexPath) as? PostTableViewCell else { fatalError() }
+        cell.configPostArray(post: postExamples[indexPath.row])
+        
+        return cell
+    }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 220 : 0
+        return section == 0 ? 240 : 0
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            guard let cell = tableView.cellForRow(at: indexPath) else { return }
+        if let post = cell as? PostTableViewCell {
+            post.incrementPostViewsCounter()
+        }
+    }
+
 }
