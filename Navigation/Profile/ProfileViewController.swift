@@ -79,7 +79,7 @@ extension ProfileViewController: UITableViewDataSource {
         case 1: return postExamples.count
         default:
             assertionFailure("no registered section")
-            return 1
+            return postExamples.count
         }
     }
     
@@ -106,7 +106,12 @@ extension ProfileViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = postTableView.dequeueReusableCell(withIdentifier: postId, for: indexPath) as? PostTableViewCell else { fatalError() }
+        guard let cell = postTableView.dequeueReusableCell(
+            withIdentifier: postId,
+            for: indexPath
+        ) as? PostTableViewCell else {
+            fatalError()
+        }
         cell.configPostArray(post: postExamples[indexPath.row])
         
         return cell
