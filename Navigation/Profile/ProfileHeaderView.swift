@@ -1,6 +1,6 @@
 import UIKit
 
-final class ProfileHeaderView: UIView {
+final class ProfileHeaderView: UITableViewHeaderFooterView {
     
     var statusText = "Статус..."
     
@@ -78,8 +78,9 @@ final class ProfileHeaderView: UIView {
     
     //MARK: Initial
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
         setupAddSubview()
         setupConstraint()
         statusTextField.delegate = self

@@ -2,15 +2,15 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    static let headerId = "header"
-    static let postId = "post"
+    private let headerId = "header"
+    private let postId = "post"
     
     private lazy var postTableView: UITableView = {
         let table = UITableView.init(
             frame: .zero,
             style: .grouped
         )
-        view.translatesAutoresizingMaskIntoConstraints = false
+        table.translatesAutoresizingMaskIntoConstraints = false
         
         return table
     }()
@@ -20,20 +20,30 @@ class ProfileViewController: UIViewController {
 
         view.backgroundColor = .lightGray
         
-        view.addSubview(postTableView)
+        addSubview()
         
         setupConstraints()
         tuneTableView()
     }
     
+    private func addSubview() {
+        view.addSubview(postTableView)
+    }
+    
     private func tuneTableView() {
         postTableView.rowHeight = UITableView.automaticDimension
         
-        let headerView = ProfileHeaderView()
-        postTableView.register(ProfileHeaderView.self,
-                               forHeaderFooterViewReuseIdentifier: ProfileViewController.headerId)
-        postTableView.register(PostTableViewCell.self,
-                               forCellReuseIdentifier: ProfileViewController.postId)
+        let headerView = ProfileHeaderView(frame: view.frame)
+        postTableView.setAndLayout(headerView: headerView)
+        postTableView.tableFooterView = UIView()
+        
+        postTableView.register(
+            PostTableViewCell.self,
+            forCellReuseIdentifier: postId)
+        
+        postTableView.register(
+            ProfileHeaderView.self,
+            forHeaderFooterViewReuseIdentifier: headerId)
         
         postTableView.dataSource = self
         postTableView.delegate = self
@@ -42,10 +52,10 @@ class ProfileViewController: UIViewController {
     private func setupConstraints() {
         let safeAreaGuide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            self.postTableView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
-            self.postTableView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
-            self.postTableView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
-            self.postTableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor)
+            postTableView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
+            postTableView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
+            postTableView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
+            postTableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor)
         ])
     }
     @objc func reloadTableView() {
@@ -57,22 +67,44 @@ class ProfileViewController: UIViewController {
 
 
 extension ProfileViewController: UITableViewDataSource {
-    func tableView(
-        _ tableView: UITableView,
-        numberOfRowsInSection section: Int)
-    -> Int {
-        1
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
+        case 0: return 1
+        case 1: return postExamples.count
+        default:
+            assertionFailure("no registered section")
+            return 1
+        }
     }
     
-    func tableView(
-        _ tableView: UITableView,
-        cellForRowAt indexPath: IndexPath)
-    -> UITableViewCell {
-        <#code#>
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = postTableView.dequeueReusableCell(withIdentifier: postId, for: indexPath) as? PostTableViewCell else { fatalError() }
+        cell.configPostArray(post: postExamples[indexPath.row])
+        
+        return cell
     }
     
 }
 
 extension ProfileViewController: UITableViewDelegate {
+    
+    private func tableView(_ tableView: UITableView, heighForHeaderInSection section: Int) -> CGFloat {
+        UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let headerView = postTableView.dequeueReusableHeaderFooterView(
+            withIdentifier: headerId
+        ) as? ProfileHeaderView else {
+            fatalError()
+        }
+        
+        return headerView
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == 0 ? 220 : 0
+    }
     
 }

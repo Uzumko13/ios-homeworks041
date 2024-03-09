@@ -53,17 +53,21 @@ class PostTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(postAuthor)
-        contentView.addSubview(postImage)
-        contentView.addSubview(postDescription)
-        contentView.addSubview(postLikes)
-        contentView.addSubview(postViews)
+        addsubview()
         setupConstraints()
         self.selectionStyle = .default
     }
     
     required init?(coder: NSCoder) {
         fatalError("Код не был реализован")
+    }
+    
+    func addsubview() {
+        contentView.addSubview(postAuthor)
+        contentView.addSubview(postImage)
+        contentView.addSubview(postDescription)
+        contentView.addSubview(postLikes)
+        contentView.addSubview(postViews)
     }
     
     private func setupConstraints() {
