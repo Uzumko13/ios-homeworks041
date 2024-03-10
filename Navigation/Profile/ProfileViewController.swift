@@ -74,22 +74,28 @@ extension ProfileViewController: UITableViewDataSource {
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0: return 1
-        case 1: return postExamples.count
-        default:
-            assertionFailure("no registered section")
             return postExamples.count
-        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
 }
 
 extension ProfileViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = postTableView.dequeueReusableCell(
+            withIdentifier: postId,
+            for: indexPath
+        ) as? PostTableViewCell else {
+            fatalError()
+        }
+        cell.configPostArray(post: postExamples[indexPath.row])
+        
+        return cell
+    }
     
     private func tableView(_ tableView: UITableView, heighForHeaderInSection section: Int) -> CGFloat {
         UITableView.automaticDimension
@@ -105,18 +111,6 @@ extension ProfileViewController: UITableViewDelegate {
         return headerView
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = postTableView.dequeueReusableCell(
-            withIdentifier: postId,
-            for: indexPath
-        ) as? PostTableViewCell else {
-            fatalError()
-        }
-        cell.configPostArray(post: postExamples[indexPath.row])
-        
-        return cell
-    }
-
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return section == 0 ? 240 : 0
     }
@@ -127,5 +121,4 @@ extension ProfileViewController: UITableViewDelegate {
             post.incrementPostViewsCounter()
         }
     }
-
 }
