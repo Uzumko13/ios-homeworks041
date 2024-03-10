@@ -2,39 +2,125 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    private lazy var profileHeaderView: ProfileHeaderView = {
-        let view = ProfileHeaderView()
-        view.translatesAutoresizingMaskIntoConstraints = false
+    private let headerId = "header"
+    private let postId = "post"
+    
+    private lazy var postTableView: UITableView = {
+        let table = UITableView.init(
+            frame: .zero,
+            style: .grouped
+        )
+        table.translatesAutoresizingMaskIntoConstraints = false
         
-        return view
+        return table
     }()
     
+    // MARK: Metohds
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .lightGray
         
-        view.addSubview(self.profileHeaderView)
+        addSubview()
         
-        setupConstraint()
-        viewWillLayoutSubviews()
-        
+        setupConstraints()
+        tuneTableView()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        profileHeaderView.frame = view.frame
-        
+    private func addSubview() {
+        view.addSubview(postTableView)
     }
     
-    private func setupConstraint() {
+    private func tuneTableView() {
+        postTableView.rowHeight = UITableView.automaticDimension
+        
+        let headerView = ProfileHeaderView(frame: view.frame)
+        postTableView.setAndLayout(headerView: headerView)
+        postTableView.tableFooterView = UIView()
+        
+        postTableView.register(
+            PostTableViewCell.self,
+            forCellReuseIdentifier: postId)
+        
+        postTableView.register(
+            ProfileHeaderView.self,
+            forHeaderFooterViewReuseIdentifier: headerId)
+        
+        postTableView.dataSource = self
+        postTableView.delegate = self
+        postTableView.refreshControl = UIRefreshControl()
+        postTableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
+    }
+    
+    
+    private func setupConstraints() {
+        let safeAreaGuide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            self.profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            self.profileHeaderView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            self.profileHeaderView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            self.profileHeaderView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            postTableView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
+            postTableView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
+            postTableView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
+            postTableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor)
         ])
+    }
+    @objc func reloadTableView() {
+        postTableView.reloadData()
+        postTableView.refreshControl?.endRefreshing()
+    }
+}
+
+//MARK: Extentions
+
+extension ProfileViewController: UITableViewDataSource {
+    
+
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return postExamples.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+}
+
+extension ProfileViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = postTableView.dequeueReusableCell(
+            withIdentifier: postId,
+            for: indexPath
+        ) as? PostTableViewCell else {
+            fatalError()
+        }
+        cell.configPostArray(post: postExamples[indexPath.row])
+        
+        return cell
+    }
+    
+    private func tableView(_ tableView: UITableView, heighForHeaderInSection section: Int) -> CGFloat {
+        UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let headerView = postTableView.dequeueReusableHeaderFooterView(
+            withIdentifier: headerId
+        ) as? ProfileHeaderView else {
+            fatalError()
+        }
+        
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == 0 ? 240 : 0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            guard let cell = tableView.cellForRow(at: indexPath) else { return }
+        if let post = cell as? PostTableViewCell {
+            post.incrementPostViewsCounter()
+        }
     }
 }
