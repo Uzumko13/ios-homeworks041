@@ -15,6 +15,8 @@ class ProfileViewController: UIViewController {
         return table
     }()
     
+    // MARK: Metohds
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -67,7 +69,7 @@ class ProfileViewController: UIViewController {
     }
 }
 
-
+//MARK: Extentions
 
 extension ProfileViewController: UITableViewDataSource {
     
