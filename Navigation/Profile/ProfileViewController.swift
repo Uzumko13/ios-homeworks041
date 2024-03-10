@@ -4,6 +4,7 @@ class ProfileViewController: UIViewController {
     
     private let headerId = "header"
     private let postId = "post"
+    private let photosId = "photos"
     
     private lazy var postTableView: UITableView = {
         let table = UITableView.init(
@@ -38,6 +39,10 @@ class ProfileViewController: UIViewController {
         let headerView = ProfileHeaderView(frame: view.frame)
         postTableView.setAndLayout(headerView: headerView)
         postTableView.tableFooterView = UIView()
+        
+        postTableView.register(
+            PhotosTableViewCell.self,
+            forCellReuseIdentifier: photosId)
         
         postTableView.register(
             PostTableViewCell.self,
@@ -76,7 +81,7 @@ extension ProfileViewController: UITableViewDataSource {
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return postExamples.count
+        return postExamples.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -99,10 +104,6 @@ extension ProfileViewController: UITableViewDelegate {
         return cell
     }
     
-    private func tableView(_ tableView: UITableView, heighForHeaderInSection section: Int) -> CGFloat {
-        UITableView.automaticDimension
-    }
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = postTableView.dequeueReusableHeaderFooterView(
             withIdentifier: headerId
@@ -118,7 +119,7 @@ extension ProfileViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            guard let cell = tableView.cellForRow(at: indexPath) else { return }
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
         if let post = cell as? PostTableViewCell {
             post.incrementPostViewsCounter()
         }
