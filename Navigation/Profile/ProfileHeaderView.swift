@@ -87,7 +87,7 @@ final class ProfileHeaderView: UITableViewHeaderFooterView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("Error")
+        fatalError("Код не был реализован")
     }
     
     //MARK: Setup metohd
