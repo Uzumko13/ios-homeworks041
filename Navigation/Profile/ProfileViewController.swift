@@ -36,10 +36,6 @@ class ProfileViewController: UIViewController {
     private func tuneTableView() {
         postTableView.rowHeight = UITableView.automaticDimension
         
-        let headerView = ProfileHeaderView(frame: view.frame)
-        postTableView.setAndLayout(headerView: headerView)
-        postTableView.tableFooterView = UIView()
-        
         postTableView.register(
             PhotosTableViewCell.self,
             forCellReuseIdentifier: photosId)
