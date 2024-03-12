@@ -68,12 +68,12 @@ class PhotosTableViewCell: UITableViewCell {
     }
     
     private func setupPreviews() {
-        for index in 0...2 {
+        for index in 0...3 {
             let image = getPreviewImage(index: index)
             imageStackView.addArrangedSubview(image)
             NSLayoutConstraint.activate([
                 image.widthAnchor.constraint(greaterThanOrEqualToConstant: (contentView.frame.width - 24) / 4),
-                image.heightAnchor.constraint(equalTo: image.widthAnchor, multiplier: 0.56)
+                image.heightAnchor.constraint(equalTo: image.widthAnchor)
             ])
         }
     }
@@ -83,12 +83,12 @@ class PhotosTableViewCell: UITableViewCell {
             labelPhotos.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutConstants.indentTwelve),
             labelPhotos.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.indentTwelve),
             labelPhotos.widthAnchor.constraint(equalToConstant: 80),
-            labelPhotos.heightAnchor.constraint(equalToConstant: 40),
+            labelPhotos.heightAnchor.constraint(equalToConstant: 24),
             
             arrow.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: LayoutConstants.indentTwelveMinus),
             arrow.centerYAnchor.constraint(equalTo: labelPhotos.centerYAnchor),
-            arrow.heightAnchor.constraint(equalToConstant: 40),
-            arrow.widthAnchor.constraint(equalToConstant: 40),
+            arrow.heightAnchor.constraint(equalToConstant: 24),
+            arrow.widthAnchor.constraint(equalToConstant: 24),
 
             imageStackView.topAnchor.constraint(equalTo: labelPhotos.bottomAnchor, constant: LayoutConstants.indentTwelve),
             imageStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.indentTwelve),

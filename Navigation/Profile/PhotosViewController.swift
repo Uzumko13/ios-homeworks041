@@ -22,7 +22,7 @@ class PhotosViewController: UIViewController {
         let photos = UICollectionView(frame: .zero, collectionViewLayout: layout)
         photos.translatesAutoresizingMaskIntoConstraints = false
         photos.backgroundColor = .white
-        photos.register(PhotosTableViewCell.self, forCellWithReuseIdentifier: photoId)
+        photos.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: photoId)
         
         return photos
     }()
@@ -36,7 +36,7 @@ class PhotosViewController: UIViewController {
         self.view.addSubview(photosCollectionView)
         self.photosCollectionView.dataSource = self
         self.photosCollectionView.delegate = self
-        
+        setupConstraints()
     }
     
     private func setupConstraints() {
@@ -67,7 +67,7 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
         let itemCount: CGFloat = 3
         let accessileWidth = collectionView.frame.width - 32
         let widthItem = (accessileWidth / itemCount)
-        return CGSize(width: widthItem, height: widthItem * 0.56)
+        return CGSize(width: widthItem, height: widthItem)
     }
 }
 extension PhotosViewController: UICollectionViewDataSource {

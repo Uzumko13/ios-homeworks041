@@ -37,16 +37,16 @@ class ProfileViewController: UIViewController {
         postTableView.rowHeight = UITableView.automaticDimension
         
         postTableView.register(
-            PhotosTableViewCell.self,
-            forCellReuseIdentifier: photosId)
+            ProfileHeaderView.self,
+            forHeaderFooterViewReuseIdentifier: headerId)
         
         postTableView.register(
             PostTableViewCell.self,
             forCellReuseIdentifier: postId)
         
         postTableView.register(
-            ProfileHeaderView.self,
-            forHeaderFooterViewReuseIdentifier: headerId)
+            PhotosTableViewCell.self,
+            forCellReuseIdentifier: photosId)
         
         postTableView.dataSource = self
         postTableView.delegate = self
@@ -77,11 +77,17 @@ extension ProfileViewController: UITableViewDataSource {
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return postExamples.count
+        switch section {
+        case 0: return 1
+        case 1: return postExamples.count
+        default:
+            assertionFailure("Нет зарегистрированной секции")
+            return 1
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
 }
@@ -89,24 +95,28 @@ extension ProfileViewController: UITableViewDataSource {
 extension ProfileViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = postTableView.dequeueReusableCell(
-            withIdentifier: postId,
-            for: indexPath
-        ) as? PostTableViewCell else {
-            fatalError()
+        switch indexPath.section {
+        case 0:
+            let cell = postTableView.dequeueReusableCell(
+                withIdentifier: photosId,
+                for: indexPath) as! PhotosTableViewCell
+            return cell
+        case 1:
+            let cell = postTableView.dequeueReusableCell(
+                withIdentifier: postId,
+                for: indexPath
+            ) as! PostTableViewCell
+            cell.configPostArray(post: postExamples[indexPath.row])
+            return cell
+        default:
+            assertionFailure("Нет зарегистрированной секции")
+            return UITableViewCell()
         }
-        cell.configPostArray(post: postExamples[indexPath.row])
-        
-        return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let headerView = postTableView.dequeueReusableHeaderFooterView(
-            withIdentifier: headerId
-        ) as? ProfileHeaderView else {
-            fatalError()
-        }
-        
+        guard section == 0 else { return nil }
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerId) as! ProfileHeaderView
         return headerView
     }
     
@@ -115,9 +125,17 @@ extension ProfileViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) else { return }
-        if let post = cell as? PostTableViewCell {
-            post.incrementPostViewsCounter()
+        switch indexPath.section {
+        case 0:
+            tableView.deselectRow(at: indexPath, animated: false)
+            navigationController?.pushViewController(PhotosViewController(), animated: true)
+        case 1:
+            guard let cell = tableView.cellForRow(at: indexPath) else { return }
+            if let post = cell as? PostTableViewCell {
+                post.incrementPostViewsCounter()
+            }
+        default:
+            assertionFailure("Нет зарегистрированной секции")
         }
     }
 }
