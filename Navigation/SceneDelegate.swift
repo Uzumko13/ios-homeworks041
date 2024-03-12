@@ -13,35 +13,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: scene)
         
+        let loginViewController = LogInViewController()
+        let profileNavigationController = UINavigationController(rootViewController: loginViewController)
+        profileNavigationController.tabBarItem = UITabBarItem(title: "Профиль",
+                                                        image: UIImage(systemName: "person"),
+                                                        selectedImage: UIImage(systemName: "person.fill"))
+        
         let feedViewController = FeedViewController()
         feedViewController.title = "Лента"
-        let profileViewController = ProfileViewController()
-        profileViewController.title = "Профиль"
-        let postViewController = PostViewController()
-        
-        _ = UINavigationController(rootViewController: feedViewController)
-        _ = UINavigationController(rootViewController: profileViewController)
-        _ = UINavigationController(rootViewController: postViewController)
-
-        let tabBarController = UITabBarController()
-        
-        let controllers = [feedViewController,
-                           profileViewController]
-        tabBarController.viewControllers = controllers.map {
-            UINavigationController(rootViewController: $0)
-        }
-        tabBarController.selectedIndex = 0
-        
-        feedViewController.tabBarItem = UITabBarItem(title: "Лента",
+        let feedNavigationController = UINavigationController(rootViewController: feedViewController)
+        feedNavigationController.tabBarItem = UITabBarItem(title: "Лента",
                                                      image: UIImage(systemName: "newspaper"),
-                                                     tag: 0)
-        profileViewController.tabBarItem = UITabBarItem(title: "Профиль",
-                                                        image: UIImage(systemName: "person"),
-                                                        tag: 1)
-        tabBarController.tabBar.isTranslucent = false
-        tabBarController.tabBar.tintColor = UIColor(red: 0.6, green: 0.5, blue: 0.5, alpha: 1)
-        tabBarController.tabBar.unselectedItemTintColor = UIColor(red: 0.5, green: 0.6, blue: 0.5, alpha: 1)
-        tabBarController.tabBar.backgroundColor = UIColor(white: 1, alpha: 0.9)
+                                                     selectedImage: UIImage(systemName: "newspaper.fill"))
+        
+        let tabBarController = UITabBarController()
+        tabBarController.tabBar.backgroundColor = .white
+        tabBarController.viewControllers = [profileNavigationController, feedNavigationController]
         
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
