@@ -1,12 +1,12 @@
 import UIKit
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     
     private let headerId = "header"
     private let postId = "post"
     private let photosId = "photos"
     
-    private lazy var postTableView: UITableView = {
+    static var postTableView: UITableView = {
         let table = UITableView.init(
             frame: .zero,
             style: .grouped
@@ -30,43 +30,43 @@ class ProfileViewController: UIViewController {
     }
     
     private func addSubview() {
-        view.addSubview(postTableView)
+        view.addSubview(ProfileViewController.postTableView)
     }
     
     private func tuneTableView() {
-        postTableView.rowHeight = UITableView.automaticDimension
+        ProfileViewController.postTableView.rowHeight = UITableView.automaticDimension
         
-        postTableView.register(
+        ProfileViewController.postTableView.register(
             ProfileHeaderView.self,
             forHeaderFooterViewReuseIdentifier: headerId)
         
-        postTableView.register(
+        ProfileViewController.postTableView.register(
             PostTableViewCell.self,
             forCellReuseIdentifier: postId)
         
-        postTableView.register(
+        ProfileViewController.postTableView.register(
             PhotosTableViewCell.self,
             forCellReuseIdentifier: photosId)
         
-        postTableView.dataSource = self
-        postTableView.delegate = self
-        postTableView.refreshControl = UIRefreshControl()
-        postTableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
+        ProfileViewController.postTableView.dataSource = self
+        ProfileViewController.postTableView.delegate = self
+        ProfileViewController.postTableView.refreshControl = UIRefreshControl()
+        ProfileViewController.postTableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
     }
     
     
     private func setupConstraints() {
         let safeAreaGuide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            postTableView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
-            postTableView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
-            postTableView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
-            postTableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor)
+            ProfileViewController.postTableView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
+            ProfileViewController.postTableView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
+            ProfileViewController.postTableView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
+            ProfileViewController.postTableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor)
         ])
     }
     @objc func reloadTableView() {
-        postTableView.reloadData()
-        postTableView.refreshControl?.endRefreshing()
+        ProfileViewController.postTableView.reloadData()
+        ProfileViewController.postTableView.refreshControl?.endRefreshing()
     }
 }
 
@@ -97,12 +97,12 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            let cell = postTableView.dequeueReusableCell(
+            let cell = ProfileViewController.postTableView.dequeueReusableCell(
                 withIdentifier: photosId,
                 for: indexPath) as! PhotosTableViewCell
             return cell
         case 1:
-            let cell = postTableView.dequeueReusableCell(
+            let cell = ProfileViewController.postTableView.dequeueReusableCell(
                 withIdentifier: postId,
                 for: indexPath
             ) as! PostTableViewCell

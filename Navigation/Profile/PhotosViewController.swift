@@ -31,12 +31,12 @@ class PhotosViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.title = "Фотогаллерея"
         self.view.addSubview(photosCollectionView)
         self.photosCollectionView.dataSource = self
         self.photosCollectionView.delegate = self
         setupConstraints()
+        
     }
     
     private func setupConstraints() {
@@ -50,6 +50,7 @@ class PhotosViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationItem.backBarButtonItem?.title = "Nazad"
         navigationController?.navigationBar.isHidden = false
     }
     
