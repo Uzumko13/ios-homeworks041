@@ -2,52 +2,55 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    private lazy var actionButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 12
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Переход на пост", for: .normal)
-        button.setTitleColor(.systemOrange, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
-        
-        return button
-    }()
-    
-    var post = Post(title: "Мои новости")
+//    var post = Post(title: "Мои новости")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .gray
         
-        view.addSubview(actionButton)
-        
-        let safeAreaLayoutGuide = view.safeAreaLayoutGuide
-        NSLayoutConstraint.activate([
-            actionButton.leadingAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.leadingAnchor,
-                constant: 20.0
-            ),
-            actionButton.trailingAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.trailingAnchor,
-                constant: -20
-            ),
-            actionButton.centerYAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.centerYAnchor),
-            actionButton.heightAnchor.constraint(equalToConstant: 50.0)
-        ])
-        
-        actionButton.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
-        
+        if #available(iOS 15.0, *) {
+            createStackView()
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
-    @objc func buttonPressed(_ sender: UIButton) {
+    @available(iOS 15.0, *)
+    
+    
+    private func createStackView() {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            stackView.heightAnchor.constraint(equalToConstant: 200),
+            stackView.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor, constant: -32)
+        ])
+        actionPostButton(title: "Первый пост", color: .systemOrange, to: stackView, selector: #selector(tapButtonPost))
+        actionPostButton(title: "Второй пост", color: .systemCyan, to: stackView, selector: #selector(tapButtonPost))
+    }
+    
+    private func actionPostButton(title: String, color: UIColor, to view: UIStackView, selector: Selector) {
+        let button = UIButton()
+        button.backgroundColor = color
+        button.layer.cornerRadius = view.layer.cornerRadius
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: selector, for: .touchUpInside)
+        view.addArrangedSubview(button)
+    }
+    
+    @objc func tapButtonPost() {
         
         let postViewController = PostViewController()
-        
         self.navigationController?.pushViewController(postViewController, animated: true)
-        postViewController.titlePost = post.title
-        self.navigationItem.title = postViewController.titlePost
     }
 }
