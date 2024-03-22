@@ -1,13 +1,14 @@
 
 import UIKit
+import StorageService
 
-class PostTableViewCell: UITableViewCell {
+public class PostTableViewCell: UITableViewCell {
     
-    private var viewsCounter = 0
+    public var viewsCounter = 0
     
     // MARK: Visual objects
     
-    var postAuthor: UILabel = {
+    public var postAuthor: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 20, weight: .bold)
@@ -16,7 +17,7 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
     
-    var postImage: UIImageView = {
+    public var postImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.backgroundColor = .black
@@ -24,7 +25,7 @@ class PostTableViewCell: UITableViewCell {
         return image
     }()
     
-    var postDescription: UILabel = {
+    public var postDescription: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 14)
@@ -33,7 +34,7 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
     
-    var postLikes: UILabel = {
+    public var postLikes: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 16)
@@ -41,7 +42,7 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
     
-    var postViews: UILabel = {
+    public var postViews: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 16)
@@ -51,7 +52,7 @@ class PostTableViewCell: UITableViewCell {
     
     // MARK: Init
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addsubview()
         setupConstraints()
@@ -62,7 +63,7 @@ class PostTableViewCell: UITableViewCell {
         fatalError("Код не был реализован")
     }
     
-    func addsubview() {
+    public func addsubview() {
         contentView.addSubview(postAuthor)
         contentView.addSubview(postImage)
         contentView.addSubview(postDescription)
@@ -70,7 +71,7 @@ class PostTableViewCell: UITableViewCell {
         contentView.addSubview(postViews)
     }
     
-    private func setupConstraints() {
+    public func setupConstraints() {
         NSLayoutConstraint.activate([
             postAuthor.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutConstants.indent),
             postAuthor.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.leadingMargin),
@@ -96,7 +97,7 @@ class PostTableViewCell: UITableViewCell {
     
     //MARK: Run metohd
     
-    func configPostArray(post: Post) {
+    public func configPostArray(post: Post) {
         postAuthor.text = post.author
         postDescription.text = post.description
         postImage.image = UIImage(named: post.image)
@@ -105,7 +106,7 @@ class PostTableViewCell: UITableViewCell {
         postViews.text = "Просмотры: \(viewsCounter)"
     }
     
-    func incrementPostViewsCounter() {
+    public func incrementPostViewsCounter() {
         viewsCounter += 1
         postViews.text = "Просмотры: \(viewsCounter)"
     }
