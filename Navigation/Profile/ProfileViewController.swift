@@ -1,4 +1,5 @@
 import UIKit
+//Unexpected input file: /Users/uzumko/Desktop/Home Work Interface App/Navigation/DEBUG
 
 final class ProfileViewController: UIViewController {
     
@@ -20,8 +21,12 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+#if DEBUG
+        view.backgroundColor = .blue
+#else
         view.backgroundColor = .lightGray
+#endif
         
         addSubview()
         
@@ -73,8 +78,6 @@ final class ProfileViewController: UIViewController {
 //MARK: Extentions
 
 extension ProfileViewController: UITableViewDataSource {
-    
-
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
