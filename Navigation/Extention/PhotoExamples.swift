@@ -7,8 +7,6 @@ final class Photos {
     let examples: [UIImage]
     
     private init() {
-        var photos = [UIImage]()
-        for i in 1...20 { photos.append((UIImage(named: "\(i)") ?? UIImage())) }
-        examples = photos.shuffled()
+        examples = (1...20).compactMap { UIImage(named: "\($0)") }.shuffled()
     }
 }
