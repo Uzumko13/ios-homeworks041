@@ -131,39 +131,6 @@ final class ProfileHeaderView: UITableViewHeaderFooterView {
         returnAvatarButton.addTarget(self, action: #selector(returnAvatarToOrigin), for: .touchUpInside)
     }
     
-//    private func setupConstraints() {
-//        statusLabel.text = statusText
-//        NSLayoutConstraint.activate([
-//            avatar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-//            avatar.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-//            avatar.widthAnchor.constraint(equalToConstant: 128),
-//            avatar.heightAnchor.constraint(equalTo: avatar.widthAnchor),
-//            
-//            returnAvatarButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-//            returnAvatarButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-//            
-//            fullNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
-//            fullNameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 156),
-//            fullNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-//            fullNameLabel.heightAnchor.constraint(equalToConstant: 28),
-//            
-//            statusLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 16),
-//            statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
-//            statusLabel.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor),
-//            statusLabel.heightAnchor.constraint(equalTo: fullNameLabel.heightAnchor),
-//            
-//            statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 16),
-//            statusTextField.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
-//            statusTextField.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor),
-//            statusTextField.heightAnchor.constraint(equalToConstant: 40),
-//            
-//            statusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16),
-//            statusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-//            statusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-//            statusButton.heightAnchor.constraint(equalToConstant: 50),
-//            
-//        ])
-//    }
     private func setupConstraintsSnp() {
         statusLabel.text = statusText
         avatar.snp.makeConstraints { make in
