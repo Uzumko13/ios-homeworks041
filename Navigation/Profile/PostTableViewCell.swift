@@ -66,6 +66,8 @@ public class PostTableViewCell: UITableViewCell {
         fatalError("Код не был реализован")
     }
     
+    //MARK: - Setup Methods 
+    
     public func addsubview() {
         contentView.addSubview(postAuthor)
         contentView.addSubview(postImage)
