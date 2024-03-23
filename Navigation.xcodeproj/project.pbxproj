@@ -35,7 +35,9 @@
 		DDCBFE072BAE25D5002E8FA0 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DDCBFDF12BAE25D5002E8FA0 /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DDCBFE0E2BAE25F2002E8FA0 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD293B6B2B69931D00DAA167 /* Post.swift */; };
 		DDCBFE102BAE3513002E8FA0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD293B672B69924A00DAA167 /* ProfileViewController.swift */; };
-		EF81AC4455CBC64813609B4E /* Pods_Navigation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B248F2BCE2F494BAFCA0701 /* Pods_Navigation.framework */; };
+		DDE4EC872BAECC5B00AEF5CF /* Pods_Navigation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B248F2BCE2F494BAFCA0701 /* Pods_Navigation.framework */; };
+		DDE4EC882BAECC5B00AEF5CF /* Pods_Navigation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B248F2BCE2F494BAFCA0701 /* Pods_Navigation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DDE4EC8D2BAECCDD00AEF5CF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDE4EC8C2BAECCDD00AEF5CF /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				DDE4EC882BAECC5B00AEF5CF /* Pods_Navigation.framework in Embed Frameworks */,
 				DDCBFE072BAE25D5002E8FA0 /* StorageService.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -113,6 +116,10 @@
 		DDCBFDF42BAE25D5002E8FA0 /* StorageService.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = StorageService.docc; sourceTree = "<group>"; };
 		DDCBFDFA2BAE25D5002E8FA0 /* StorageServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StorageServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDCBFE012BAE25D5002E8FA0 /* StorageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServiceTests.swift; sourceTree = "<group>"; };
+		DDE4EC892BAECC9000AEF5CF /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDE4EC8C2BAECCDD00AEF5CF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		DDE4EC8E2BAECD6B00AEF5CF /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDE4EC912BAED08F00AEF5CF /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,8 +127,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDE4EC872BAECC5B00AEF5CF /* Pods_Navigation.framework in Frameworks */,
 				DDCBFE062BAE25D5002E8FA0 /* StorageService.framework in Frameworks */,
-				EF81AC4455CBC64813609B4E /* Pods_Navigation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +137,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				62087052EDF81105032631B6 /* Pods_StorageService.framework in Frameworks */,
+				DDE4EC8D2BAECCDD00AEF5CF /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +156,10 @@
 		17BF9B19509B8FA2A159EDE0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DDE4EC912BAED08F00AEF5CF /* SnapKit.framework */,
+				DDE4EC8E2BAECD6B00AEF5CF /* SnapKit.framework */,
+				DDE4EC8C2BAECCDD00AEF5CF /* Foundation.framework */,
+				DDE4EC892BAECC9000AEF5CF /* SnapKit.framework */,
 				7B248F2BCE2F494BAFCA0701 /* Pods_Navigation.framework */,
 				45AA8D1F2CF8FD860D74010E /* Pods_StorageService.framework */,
 				C2E946682F81BCD57D8B016B /* Pods_StorageService_StorageServiceTests.framework */,
@@ -165,7 +177,6 @@
 				697C9BD8FF4F4782EABFA87C /* Pods-StorageService-StorageServiceTests.debug.xcconfig */,
 				AD1FFB8C52787B5381E4278C /* Pods-StorageService-StorageServiceTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -591,7 +602,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -655,7 +666,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -822,7 +833,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 697C9BD8FF4F4782EABFA87C /* Pods-StorageService-StorageServiceTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -841,7 +851,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AD1FFB8C52787B5381E4278C /* Pods-StorageService-StorageServiceTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
