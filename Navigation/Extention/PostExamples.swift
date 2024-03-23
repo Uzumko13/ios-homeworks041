@@ -4,6 +4,7 @@
 //
 
 import StorageService
+import iOSIntPackage
 
 public let postExamples: [Post] = [
      Post(author: "Семен Свон",

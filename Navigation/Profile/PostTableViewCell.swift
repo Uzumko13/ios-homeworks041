@@ -1,6 +1,7 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
 
 public class PostTableViewCell: UITableViewCell {
     
@@ -24,6 +25,7 @@ public class PostTableViewCell: UITableViewCell {
         image.contentMode = .scaleAspectFill
         return image
     }()
+    
     
     public var postDescription: UILabel = {
         let label = UILabel()
@@ -56,6 +58,7 @@ public class PostTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addsubview()
         setupConstraints()
+        
         self.selectionStyle = .default
     }
     
@@ -101,10 +104,14 @@ public class PostTableViewCell: UITableViewCell {
         postAuthor.text = post.author
         postDescription.text = post.description
         postImage.image = UIImage(named: post.image)
+        let imageFilter = ImageProcessor()
+        imageFilter.processImage(sourceImage: postImage.image!, filter: .crystallize(radius: 20.0), completion: { image in postImage.image = image })
         postLikes.text = "Лайки: \(post.likes)"
         viewsCounter = post.views
         postViews.text = "Просмотры: \(viewsCounter)"
     }
+    
+    
     
     public func incrementPostViewsCounter() {
         viewsCounter += 1
