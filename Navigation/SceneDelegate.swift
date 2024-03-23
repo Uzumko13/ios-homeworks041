@@ -1,22 +1,39 @@
-//
-//  SceneDelegate.swift
-//  Navigation
-//
-//  Created by Иван Беляев on 30.01.2024.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+    func scene(
+        _ scene: UIScene,
+        willConnectTo session: UISceneSession,
+        options connectionOptions: UIScene.ConnectionOptions
+    ) {
+        guard let scene = (scene as? UIWindowScene) else { return }
+        
+        let window = UIWindow(windowScene: scene)
+        
+        let loginViewController = LogInViewController()
+        let profileNavigationController = UINavigationController(rootViewController: loginViewController)
+        profileNavigationController.tabBarItem = UITabBarItem(title: "Профиль",
+                                                        image: UIImage(systemName: "person"),
+                                                        selectedImage: UIImage(systemName: "person.fill"))
+        
+        let feedViewController = FeedViewController()
+        feedViewController.title = "Лента"
+        let feedNavigationController = UINavigationController(rootViewController: feedViewController)
+        feedNavigationController.tabBarItem = UITabBarItem(title: "Лента",
+                                                     image: UIImage(systemName: "newspaper"),
+                                                     selectedImage: UIImage(systemName: "newspaper.fill"))
+        
+        let tabBarController = UITabBarController()
+        tabBarController.tabBar.backgroundColor = .white
+        tabBarController.viewControllers = [profileNavigationController, feedNavigationController]
+        
+        window.rootViewController = tabBarController
+        window.makeKeyAndVisible()
+        
+        self.window = window
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
