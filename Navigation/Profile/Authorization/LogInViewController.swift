@@ -7,6 +7,14 @@
 
 import UIKit
 
+enum LoginError: Error {
+    
+    case userNotFound
+    case wrongPassword
+    case serverError
+    case tooStrongPassword
+}
+
 final class LogInViewController: UIViewController {
     
     //MARK: Content elements

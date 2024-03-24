@@ -7,6 +7,10 @@ final class ProfileViewController: UIViewController {
     private let postId = "post"
     private let photosId = "photos"
     
+    private var currentUser: User?
+    private let currentUserLogin: String
+    private let userService: UserService
+    
     static var postTableView: UITableView = {
         let table = UITableView.init(
             frame: .zero,
@@ -16,6 +20,20 @@ final class ProfileViewController: UIViewController {
         
         return table
     }()
+    
+    // MARK: - Init
+    
+    init(userService: UserService, typedLogin: String) {
+        
+        self.userService = userService
+        self.currentUserLogin = typedLogin
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: Metohds
     
