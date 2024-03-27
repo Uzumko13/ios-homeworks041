@@ -11,6 +11,8 @@ final class ProfileViewController: UIViewController {
     private let currentUserLogin: String
     private let userService: UserService
     
+    private let headerView = ProfileHeaderView()
+    
     static var postTableView: UITableView = {
         let table = UITableView.init(
             frame: .zero,
@@ -20,6 +22,8 @@ final class ProfileViewController: UIViewController {
         
         return table
     }()
+    
+    
     
     // MARK: - Init
     
@@ -40,6 +44,7 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
 #if DEBUG
         view.backgroundColor = .blue
 #else
@@ -47,13 +52,15 @@ final class ProfileViewController: UIViewController {
 #endif
         
         addSubview()
-        
+        checkUserExistance(user: currentUserLogin)
+
         setupConstraints()
         tuneTableView()
     }
     
     private func addSubview() {
         view.addSubview(ProfileViewController.postTableView)
+
     }
     
     private func tuneTableView() {
@@ -84,12 +91,45 @@ final class ProfileViewController: UIViewController {
             ProfileViewController.postTableView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
             ProfileViewController.postTableView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
             ProfileViewController.postTableView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
-            ProfileViewController.postTableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor)
+            ProfileViewController.postTableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
+            
         ])
     }
     @objc func reloadTableView() {
         ProfileViewController.postTableView.reloadData()
         ProfileViewController.postTableView.refreshControl?.endRefreshing()
+    }
+    
+    private func checkUserExistance(user: String){
+        do {
+            self.currentUser = try userService.authUser(userLogin: user)
+        } catch LoginError.serverError {
+            let error = "User not found"
+            
+            DispatchQueue.main.async { [self] in
+                let alertController = UIAlertController(title: error, message: "Something went wrong on the server side. Please, try to log in again", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "ОК...", style: .default) { _ in
+                    print(error)
+                    self.navigationController?.popViewController(animated: true)
+                }
+                alertController.addAction(okAction)
+            
+                present(alertController, animated: true, completion: nil)
+            }
+        } catch {
+            let error = "Unknown error been cathced"
+            
+            DispatchQueue.main.async { [self] in
+                let alertController = UIAlertController(title: error, message: "Something went wrong. Please, reload the app", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "ОК...", style: .default) { _ in
+                    print(error)
+                    fatalError(error)
+                }
+                alertController.addAction(okAction)
+            
+                present(alertController, animated: true, completion: nil)
+            }
+        }
     }
 }
 
@@ -136,9 +176,15 @@ extension ProfileViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard section == 0 else { return nil }
-        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerId) as! ProfileHeaderView
+        let headerView = self.headerView
+
+        let user = currentUser
+        
+        headerView.avatar.image = user?.userAvatar
+        headerView.fullNameLabel.text = user?.userName
+
         return headerView
+
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

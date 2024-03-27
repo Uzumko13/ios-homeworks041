@@ -98,7 +98,7 @@ final class ProfileHeaderView: UITableViewHeaderFooterView {
         setupAddSubview()
         setupGestureAvatar()
         setupConstraints()
-
+        
         
         statusTextField.delegate = self
     }
