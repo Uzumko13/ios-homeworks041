@@ -104,10 +104,10 @@ final class ProfileViewController: UIViewController {
         do {
             self.currentUser = try userService.authUser(userLogin: user)
         } catch LoginError.serverError {
-            let error = "User not found"
+            let error = "Пользователь не найден"
             
             DispatchQueue.main.async { [self] in
-                let alertController = UIAlertController(title: error, message: "Something went wrong on the server side. Please, try to log in again", preferredStyle: .alert)
+                let alertController = UIAlertController(title: error, message: "Что-то пошло не так на стороне сервера. Пожалуйста, попробуйте войти в систему еще раз", preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "ОК...", style: .default) { _ in
                     print(error)
                     self.navigationController?.popViewController(animated: true)
@@ -117,10 +117,10 @@ final class ProfileViewController: UIViewController {
                 present(alertController, animated: true, completion: nil)
             }
         } catch {
-            let error = "Unknown error been cathced"
+            let error = "Обнаружена неизвестная ошибка"
             
             DispatchQueue.main.async { [self] in
-                let alertController = UIAlertController(title: error, message: "Something went wrong. Please, reload the app", preferredStyle: .alert)
+                let alertController = UIAlertController(title: error, message: "Что-то пошло не так. Пожалуйста, перезагрузите приложение", preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "ОК...", style: .default) { _ in
                     print(error)
                     fatalError(error)
