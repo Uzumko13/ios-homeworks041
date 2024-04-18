@@ -7,17 +7,9 @@
 
 import UIKit
 
-enum LoginError: Error {
-    
-    case userNotFound
-    case wrongPassword
-    case serverError
-    case tooStrongPassword
-}
-
 final class LogInViewController: UIViewController {
     
-    //MARK: Content elements
+    //MARK: View elements
     
     var loginScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -199,61 +191,26 @@ final class LogInViewController: UIViewController {
         
     }
     
-    private func errorCatched(error : String, errorMessage: String) {
-        DispatchQueue.main.async { [self] in
-            let alertController = UIAlertController(title: error, message: errorMessage, preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "ОК...", style: .default) { _ in
-                print(error)
-            }
-            alertController.addAction(okAction)
-        
-            activitiIndicator.stopAnimating()
-            present(alertController, animated: true, completion: nil)
-        }
-    }
-    
     //MARK: Event
     
     
     @objc private func tapLoginButton() {
-        let typedLogin = loginField.text
-//        let typedPassword = passwordTextField.text ?? ""
         #if DEBUG
-        let userService = TestUserService()
-        let profileViewController = ProfileViewController(userService: userService, typedLogin: userService.testUser.userLogin)
-        
-        navigationController?.pushViewController(profileViewController, animated: true)
+        let service = TestUserService()
         
         #else
-        let userService = CurrentUserService()
+        let service = CurrentUserService()
         
-        if let existingUserLogin = typedLogin {
-            let profileViewController = ProfileViewController(userService: userService, typedLogin: existingUserLogin)
-            
-            do {
-                let currentUser = try userService.authUser(userLogin: existingUserLogin)
-            
-                if currentUser.userAvatar != UIImage() {
-                
-                    let currentMoment = Date()
-                    guard let checkedLogin = typedLogin else {
-                        preconditionFailure()
-                    }
-                    navigationController?.pushViewController(profileViewController, animated: true)
-
-                        return
-                    }
-
-            } catch LoginError.serverError {
-                let error = "Пользователь не найден на сервере"
-                self.errorCatched(error: error, errorMessage: "Что-то пошло не так на стороне сервера. Пожалуйста, попробуйте войти в систему еще раз")
-            } catch {
-                let error = "Неизвестная ошибка"
-                self.errorCatched(error: error, errorMessage: "Что-то пошло не так. Пожалуйста, перезагрузите приложение")
-            }
-            
-        }
         #endif
+        if let user = service.getUser(login: loginField.text ?? "") {
+            let profileViewController = ProfileViewController(user: user)
+            navigationController?.setViewControllers([profileViewController], animated: true)
+            
+        } else {
+            let alert = UIAlertController(title: "Неизвестный логин", message: "Пожалуйста введите корректный логин пользователя.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Закрыть", style: .cancel))
+            self.present(alert, animated: true)
+        }
     }
     
     @objc private func keyboardShow(notification: NSNotification) {

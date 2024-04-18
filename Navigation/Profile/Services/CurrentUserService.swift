@@ -3,15 +3,12 @@ import UIKit
 
 class CurrentUserService: UserService {
     
-    let currentUser = User(userLogin: "Uzumaku13", userName: "Nikolay Mladshiy", userStatus: "Let's go!", userAvatar: .dog)
+    var user = User(login: "Uzumaku13", name: "Nikolay Mladshiy", status: "Let's go!", avatar: .dog)
 
-    func authUser(userLogin: String) throws -> User {
+    func getUser(login: String) -> User? {
         
-        if userLogin == currentUser.userLogin {
-            return currentUser
-        } else {
-            throw LoginError.serverError
-        }
+        return login == user.login ? user : nil
     }
     
 }
+

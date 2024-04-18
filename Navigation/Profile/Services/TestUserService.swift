@@ -1,14 +1,13 @@
 
-
 import UIKit
 
 class TestUserService: UserService {
     
-    let testUser = User(userLogin: "TEST", userName: "Test User", userStatus: "Test status", userAvatar: #imageLiteral(resourceName: "dog"))
+    var user = User(login: "TEST", name: "Test User", status: "Test status", avatar: #imageLiteral(resourceName: "dog"))
     
-    func authUser(userLogin: String) throws -> User {
+    func getUser(login: String) -> User? {
         
-        return testUser
+        return login == user.login ? user : nil
     }
     
 }

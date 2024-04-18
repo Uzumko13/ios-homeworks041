@@ -7,11 +7,10 @@ final class ProfileViewController: UIViewController {
     private let postId = "post"
     private let photosId = "photos"
     
-    private var currentUser: User?
-    private let currentUserLogin: String
-    private let userService: UserService
+    private let user: User
     
     private let headerView = ProfileHeaderView()
+    
     
     static var postTableView: UITableView = {
         let table = UITableView.init(
@@ -27,10 +26,9 @@ final class ProfileViewController: UIViewController {
     
     // MARK: - Init
     
-    init(userService: UserService, typedLogin: String) {
+    init(user: User) {
         
-        self.userService = userService
-        self.currentUserLogin = typedLogin
+        self.user = user
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -43,24 +41,20 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
 
 #if DEBUG
         view.backgroundColor = .blue
 #else
         view.backgroundColor = .lightGray
 #endif
-        
         addSubview()
-        checkUserExistance(user: currentUserLogin)
-
         setupConstraints()
         tuneTableView()
+        self.headerView.avatar.image = user.avatar
     }
     
     private func addSubview() {
         view.addSubview(ProfileViewController.postTableView)
-
     }
     
     private func tuneTableView() {
@@ -100,37 +94,6 @@ final class ProfileViewController: UIViewController {
         ProfileViewController.postTableView.refreshControl?.endRefreshing()
     }
     
-    private func checkUserExistance(user: String){
-        do {
-            self.currentUser = try userService.authUser(userLogin: user)
-        } catch LoginError.serverError {
-            let error = "Пользователь не найден"
-            
-            DispatchQueue.main.async { [self] in
-                let alertController = UIAlertController(title: error, message: "Что-то пошло не так на стороне сервера. Пожалуйста, попробуйте войти в систему еще раз", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "ОК...", style: .default) { _ in
-                    print(error)
-                    self.navigationController?.popViewController(animated: true)
-                }
-                alertController.addAction(okAction)
-            
-                present(alertController, animated: true, completion: nil)
-            }
-        } catch {
-            let error = "Обнаружена неизвестная ошибка"
-            
-            DispatchQueue.main.async { [self] in
-                let alertController = UIAlertController(title: error, message: "Что-то пошло не так. Пожалуйста, перезагрузите приложение", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "ОК...", style: .default) { _ in
-                    print(error)
-                    fatalError(error)
-                }
-                alertController.addAction(okAction)
-            
-                present(alertController, animated: true, completion: nil)
-            }
-        }
-    }
 }
 
 //MARK: Extentions
@@ -176,12 +139,10 @@ extension ProfileViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = self.headerView
-
-        let user = currentUser
+        let headerView = ProfileHeaderView()
         
-        headerView.avatar.image = user?.userAvatar
-        headerView.fullNameLabel.text = user?.userName
+        headerView.avatar.image = user.avatar
+        headerView.fullNameLabel.text = user.name
 
         return headerView
 

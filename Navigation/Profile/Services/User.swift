@@ -8,25 +8,31 @@
 import UIKit
 
 protocol UserService {
-    
-    func authUser(userLogin: String) throws -> User
+    var user: User { get set }
+    func getUser(login: String) -> User?
+}
+
+extension UserService {
+    func getUser(login: String) -> User? {
+        return login == user.login ? user : nil
+    }
 }
 
 class User {
     
-    internal let userLogin: String
-    internal let userName: String
-    internal let userStatus: String
-    internal var userAvatar: UIImage
+    let login: String
+    let name: String
+    let status: String
+    var avatar: UIImage
     
-    init(userLogin: String,
-         userName: String,
-         userStatus: String,
-         userAvatar: UIImage) {
+    init(login: String,
+         name: String,
+         status: String,
+         avatar: UIImage) {
         
-        self.userLogin = userLogin
-        self.userName = userName
-        self.userStatus = userStatus
-        self.userAvatar = userAvatar
+        self.login = login
+        self.name = name
+        self.status = status
+        self.avatar = avatar
     }
 }
