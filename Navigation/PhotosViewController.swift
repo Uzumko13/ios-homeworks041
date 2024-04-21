@@ -1,6 +1,7 @@
 
 
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
@@ -83,3 +84,9 @@ extension PhotosViewController: UICollectionViewDataSource {
         return cell
     }
 }
+
+//extension PhotosViewController: ImageLibrarySubscriber {
+//    func receive(images: [UIImage]) {
+//        <#code#>
+//    }
+//}

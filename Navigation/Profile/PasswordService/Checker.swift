@@ -20,12 +20,6 @@ class Checker {
     }
     
     func check (loginPassword trierString: String) -> Bool {
-        let checkString = login + password
-        
-        if trierString == checkString {
-            return true
-        } else {
-            return false
-        }
+        trierString == login + password
     }
 }
