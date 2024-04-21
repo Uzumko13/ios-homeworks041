@@ -9,8 +9,10 @@ import UIKit
 
 final class LogInViewController: UIViewController {
     
-    //MARK: View elements
+    //MARK: - Properties
+    var loginDelegate: LoginViewControllerDelegate?
     
+    //MARK: - View elements
     var loginScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -111,7 +113,7 @@ final class LogInViewController: UIViewController {
         return indicator
     }()
     
-    //MARK: setup metohd
+    //MARK: - Setup metohd
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -192,25 +194,40 @@ final class LogInViewController: UIViewController {
     }
     
     //MARK: Event
-    
-    
+
     @objc private func tapLoginButton() {
+        
+        let typedLogin = loginField.text ?? ""
+        let typedPassword = passwordField.text ?? ""
+        
         #if DEBUG
         let service = TestUserService()
-        
+        let profileViewController = ProfileViewController(user: service.user)
         #else
         let service = CurrentUserService()
-        
+        let profileViewController = ProfileViewController(user: service.user)
         #endif
-        if let user = service.getUser(login: loginField.text ?? "") {
-            let profileViewController = ProfileViewController(user: user)
-            navigationController?.setViewControllers([profileViewController], animated: true)
-            
+        let typedInfo = typedLogin + typedPassword
+        
+        if checkMyPass(typedInfo) {
+            navigationController?.pushViewController(profileViewController, animated: true)
+            return
         } else {
-            let alert = UIAlertController(title: "Неизвестный логин", message: "Пожалуйста введите корректный логин пользователя.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Неизвестный логин или пароль", message: "Пожалуйста введите корректный логин пользователя или пароль.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Закрыть", style: .cancel))
             self.present(alert, animated: true)
         }
+    }
+    
+    private func checkMyPass(_ infoToCheck: String) -> Bool {
+        _ = infoToCheck
+        
+        guard let checkResult = loginDelegate?.check(
+            stringToCheck: infoToCheck
+        ) else {
+            return false
+        }
+        return checkResult
     }
     
     @objc private func keyboardShow(notification: NSNotification) {
@@ -225,8 +242,33 @@ final class LogInViewController: UIViewController {
     }
 
 }
+    //MARK: - Protocols
 
-    //MARK: Extention
+protocol LoginViewControllerDelegate {
+    func check(stringToCheck: String) -> Bool
+}
+
+struct LoginInspector: LoginViewControllerDelegate {
+    
+    func check(stringToCheck: String) -> Bool {
+        return Checker.shared.check(loginPassword: stringToCheck)
+    }
+}
+
+protocol LoginFactory {
+    func makeLoginInspector() -> LoginInspector
+}
+
+struct MyLogInFactory: LoginFactory {
+    
+    private let inspector = LoginInspector()
+    func makeLoginInspector() -> LoginInspector {
+        return inspector
+    }
+}
+
+
+    //MARK: - Extention
 
 extension LogInViewController: UITextFieldDelegate {
 

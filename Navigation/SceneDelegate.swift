@@ -3,6 +3,8 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+    private let logDelegate = MyLogInFactory()
 
     func scene(
         _ scene: UIScene,
@@ -29,6 +31,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tabBarController = UITabBarController()
         tabBarController.tabBar.backgroundColor = .white
         tabBarController.viewControllers = [profileNavigationController, feedNavigationController]
+        
+        loginViewController.loginDelegate = logDelegate.makeLoginInspector()
         
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
