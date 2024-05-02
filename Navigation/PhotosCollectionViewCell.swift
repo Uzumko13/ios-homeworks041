@@ -1,11 +1,20 @@
 
 import UIKit
+import StorageService
 
 class PhotosCollectionViewCell: UICollectionViewCell {
     
-    var photo: UIImageView = {
+    var photo: UIImage? {
+        didSet {
+            photoImage.image = photo
+        }
+    }
+    
+    var photoImage: UIImageView = {
         let photos = UIImageView()
-        photos.translatesAutoresizingMaskIntoConstraints = false
+        photos.contentMode = .scaleAspectFit
+        photos.backgroundColor = .systemGray4
+//        photos.translatesAutoresizingMaskIntoConstraints = false
         return photos
     }()
     
@@ -13,27 +22,42 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupConstraints()
+        setupViews()
     }
     
     required init?(coder: NSCoder) {
-        fatalError("Код не был реализован")
+        super.init(coder: coder)
+        setupViews()
+    }
+    private func setupViews() {
+        addSubview(photoImage)
     }
     
-    private func setupConstraints() {
-        self.contentView.addSubview(photo)
+    override func layoutSubviews() {
+        super.layoutSubviews()
         
-        NSLayoutConstraint.activate([
-            photo.topAnchor.constraint(equalTo: contentView.topAnchor),
-            photo.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            photo.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            photo.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
+        photoImage.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: self.bounds.width,
+            height: self.bounds.height
+        )
+        
     }
-    
-    //MARK: Run loop
-    
-    public func configCollectionCell(photo: UIImage) {
-        self.photo.image = photo
-    }
+//    private func setupConstraints() {
+//        self.contentView.addSubview(photoImage)
+//        
+//        NSLayoutConstraint.activate([
+//            photoImage.topAnchor.constraint(equalTo: contentView.topAnchor),
+//            photoImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+//            photoImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+//            photoImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+//        ])
+//    }
+//    
+//    //MARK: Run loop
+//    
+//    public func configCollectionCell(photo: UIImage) {
+//        self.photoImage.image = photo
+//    }
 }

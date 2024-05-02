@@ -5,6 +5,10 @@ import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
+    private var imageCollection: [UIImage] = []
+    
+    var imagePublisherFacade: ImagePublisherFacade?
+    
     let photoId = "photoCell"
     
     //MARK: Visual objects
@@ -32,11 +36,13 @@ class PhotosViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .done, target: nil, action: nil)
         self.title = "Фотогаллерея"
         self.view.addSubview(photosCollectionView)
         self.photosCollectionView.dataSource = self
         self.photosCollectionView.delegate = self
         setupConstraints()
+        imagePublisherFacade?.subscribe(self)
         
     }
     
@@ -51,13 +57,19 @@ class PhotosViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationItem.backBarButtonItem?.title = "Nazad"
         navigationController?.navigationBar.isHidden = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        imagePublisherFacade?.removeSubscription(for: self)
+        imagePublisherFacade?.rechargeImageLibrary()
     }
 }
 
@@ -75,18 +87,27 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 extension PhotosViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return imageCollection.count
         return Photos.shared.examples.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoId, for: indexPath) as? PhotosCollectionViewCell else { return UICollectionViewCell()}
-        cell.configCollectionCell(photo: Photos.shared.examples[indexPath.item])
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PhotosCollectionViewCell.self), for: indexPath) as! PhotosCollectionViewCell
+        
+        let photo = imageCollection[indexPath.row]
+        
+        cell.photo = photo
+        
+//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoId, for: indexPath) as? PhotosCollectionViewCell else { return UICollectionViewCell()}
+//        cell.configCollectionCell(photo: Photos.shared.examples[indexPath.item])
         return cell
+
     }
 }
 
-//extension PhotosViewController: ImageLibrarySubscriber {
-//    func receive(images: [UIImage]) {
-//        <#code#>
-//    }
-//}
+extension PhotosViewController: ImageLibrarySubscriber {
+    func receive(images: [UIImage]) {
+        self.imageCollection = images
+        photosCollectionView.reloadData()
+    }
+}

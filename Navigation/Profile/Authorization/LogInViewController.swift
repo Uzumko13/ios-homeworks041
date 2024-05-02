@@ -53,6 +53,7 @@ final class LogInViewController: UIViewController {
         let login = UITextField()
         login.translatesAutoresizingMaskIntoConstraints = false
         login.placeholder = "Email or number"
+        login.text = "Uzumko"
         login.layer.borderColor = UIColor.lightGray.cgColor
         login.layer.borderWidth = 0.5
         login.leftViewMode = .always
@@ -72,6 +73,7 @@ final class LogInViewController: UIViewController {
         password.translatesAutoresizingMaskIntoConstraints = false
         password.leftViewMode = .always
         password.placeholder = "Password"
+        password.text = "NmDh2Sp"
         password.layer.borderColor = UIColor.lightGray.cgColor
         password.layer.borderWidth = 0.5
         password.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: password.frame.height))

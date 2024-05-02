@@ -1,4 +1,5 @@
 import UIKit
+import iOSIntPackage
 //Unexpected input file: /Users/uzumko/Desktop/Home Work Interface App/Navigation/DEBUG
 
 final class ProfileViewController: UIViewController {
@@ -11,6 +12,8 @@ final class ProfileViewController: UIViewController {
     
     private let headerView = ProfileHeaderView()
     
+    private let facade = ImagePublisherFacade()
+    var collection: [UIImage] = []
     
     static var postTableView: UITableView = {
         let table = UITableView.init(
@@ -153,9 +156,16 @@ extension ProfileViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
         switch indexPath.section {
         case 0:
-            tableView.deselectRow(at: indexPath, animated: false)
+            tableView.deselectRow(at: indexPath, animated: true)
+            let photoCollectionViewController = PhotosViewController()
+            PhotoStorage.photosTabel.forEach {
+                collection.append(UIImage(imageLiteralResourceName: $0.image))
+            }
+            photoCollectionViewController.imagePublisherFacade = facade
+            photoCollectionViewController.imagePublisherFacade?.addImagesWithTimer(time: 0.5, repeat: 30, userImages: collection)
             navigationController?.pushViewController(PhotosViewController(), animated: true)
         case 1:
             guard let cell = tableView.cellForRow(at: indexPath) else { return }
