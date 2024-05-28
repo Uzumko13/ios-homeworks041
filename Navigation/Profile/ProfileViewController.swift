@@ -155,25 +155,66 @@ extension ProfileViewController: UITableViewDelegate {
         return section == 0 ? 240 : 0
     }
     
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        if (indexPath.section == 0) {
+//            
+//            let photoCollectionViewController = PhotosViewController()
+//            
+//            Storage.photosTabel.forEach {
+//                collection.append(UIImage(imageLiteralResourceName: $0.image))
+//            }
+//            
+//            photoCollectionViewController.imagePublisherFacade = facade
+//            
+//            photoCollectionViewController.imagePublisherFacade?.addImagesWithTimer(time: 1.5, repeat: 30, userImages: collection)
+//            
+//            navigationController?.pushViewController(photoCollectionViewController, animated: true)
+//        } else {
+//            return
+//        }
+//    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        switch indexPath.section {
-        case 0:
-            tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+        if (indexPath.section == 0) {
+            
             let photoCollectionViewController = PhotosViewController()
+            
             PhotoStorage.photosTabel.forEach {
                 collection.append(UIImage(imageLiteralResourceName: $0.image))
             }
+            
             photoCollectionViewController.imagePublisherFacade = facade
-            photoCollectionViewController.imagePublisherFacade?.addImagesWithTimer(time: 0.5, repeat: 30, userImages: collection)
-            navigationController?.pushViewController(PhotosViewController(), animated: true)
-        case 1:
-            guard let cell = tableView.cellForRow(at: indexPath) else { return }
-            if let post = cell as? PostTableViewCell {
-                post.incrementPostViewsCounter()
-            }
-        default:
-            assertionFailure("Нет зарегистрированной секции")
+            
+            photoCollectionViewController.imagePublisherFacade?.addImagesWithTimer(time: 0.5, repeat: 20, userImages: collection)
+            
+            navigationController?.pushViewController(photoCollectionViewController, animated: true)
+        } else {
+            return
         }
     }
+//    {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        switch indexPath.section {
+//        case 0:
+//            
+//            let photoCollectionViewController = PhotosViewController()
+//            
+//            PhotoStorage.photosTabel.forEach {_ in 
+//                collection.append(UIImage(imageLiteralResourceName: Photos.shared.examples))
+//            }
+//            
+//            photoCollectionViewController.imagePublisherFacade = facade
+//            photoCollectionViewController.imagePublisherFacade?.addImagesWithTimer(time: 0.5, repeat: 30, userImages: collection)
+//            navigationController?.pushViewController(PhotosViewController(), animated: true)
+//        case 1:
+//            guard let cell = tableView.cellForRow(at: indexPath) else { return }
+//            if let post = cell as? PostTableViewCell {
+//                post.incrementPostViewsCounter()
+//            }
+//        default:
+//            assertionFailure("Нет зарегистрированной секции")
+//        }
+//    }
 }

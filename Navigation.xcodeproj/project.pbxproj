@@ -190,6 +190,16 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		DD0B4ACC2BFF3E7D00416864 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DD7803862B9DE501007770A1 /* PhotosViewController.swift */,
+				DD293B652B6991EF00DAA167 /* FeedViewController.swift */,
+				DD293B6D2B69935500DAA167 /* InfoViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		DD17129F2B77B8920086284A /* Extention */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,11 +240,9 @@
 				DD293B532B698F0F00DAA167 /* SceneDelegate.swift */,
 				DD17129F2B77B8920086284A /* Extention */,
 				DD293B6F2B6A1AA900DAA167 /* Profile */,
-				DD293B652B6991EF00DAA167 /* FeedViewController.swift */,
-				DD7803862B9DE501007770A1 /* PhotosViewController.swift */,
+				DD0B4ACC2BFF3E7D00416864 /* Controllers */,
 				DD7803822B9DD99A007770A1 /* PhotosTableViewCell.swift */,
 				DD7803882B9DE55E007770A1 /* PhotosCollectionViewCell.swift */,
-				DD293B6D2B69935500DAA167 /* InfoViewController.swift */,
 				DD293B5C2B698F1000DAA167 /* LaunchScreen.storyboard */,
 				DD293B5A2B698F1000DAA167 /* Assets.xcassets */,
 				DD293B5F2B698F1000DAA167 /* Info.plist */,

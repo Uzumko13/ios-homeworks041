@@ -27,7 +27,7 @@ class PhotosViewController: UIViewController {
         let photos = UICollectionView(frame: .zero, collectionViewLayout: layout)
         photos.translatesAutoresizingMaskIntoConstraints = false
         photos.backgroundColor = .white
-        photos.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: photoId)
+        photos.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: PhotosCollectionViewCell.self))
         
         return photos
     }()
@@ -87,18 +87,20 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 extension PhotosViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return imageCollection.count
-        return Photos.shared.examples.count
+        return imageCollection.count
+//        return Photos.shared.examples.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PhotosCollectionViewCell.self), for: indexPath) as! PhotosCollectionViewCell
         
+//        Photos.shared.examples[indexPath.item]
         let photo = imageCollection[indexPath.row]
         
         cell.photo = photo
+
         
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoId, for: indexPath) as? PhotosCollectionViewCell else { return UICollectionViewCell()}
+//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PhotosCollectionViewCell.self), for: indexPath) as? PhotosCollectionViewCell else { return UICollectionViewCell()}
 //        cell.configCollectionCell(photo: Photos.shared.examples[indexPath.item])
         return cell
 

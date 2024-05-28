@@ -14,7 +14,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         let photos = UIImageView()
         photos.contentMode = .scaleAspectFit
         photos.backgroundColor = .systemGray4
-//        photos.translatesAutoresizingMaskIntoConstraints = false
+
         return photos
     }()
     
@@ -22,14 +22,17 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setupViews()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        
         setupViews()
     }
     private func setupViews() {
+        
         addSubview(photoImage)
     }
     
