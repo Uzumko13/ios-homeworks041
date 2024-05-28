@@ -47,20 +47,4 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         )
         
     }
-//    private func setupConstraints() {
-//        self.contentView.addSubview(photoImage)
-//        
-//        NSLayoutConstraint.activate([
-//            photoImage.topAnchor.constraint(equalTo: contentView.topAnchor),
-//            photoImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-//            photoImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-//            photoImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-//        ])
-//    }
-//    
-//    //MARK: Run loop
-//    
-//    public func configCollectionCell(photo: UIImage) {
-//        self.photoImage.image = photo
-//    }
 }
