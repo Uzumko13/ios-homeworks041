@@ -43,6 +43,7 @@
 		DDE4EC882BAECC5B00AEF5CF /* Pods_Navigation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B248F2BCE2F494BAFCA0701 /* Pods_Navigation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DDE4EC8D2BAECCDD00AEF5CF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDE4EC8C2BAECCDD00AEF5CF /* Foundation.framework */; };
 		DDE4EC972BAEE1CD00AEF5CF /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = DDE4EC962BAEE1CD00AEF5CF /* iOSIntPackage */; };
+		DDE5E9E82C067C6500CCA07E /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE5E9E72C067C6500CCA07E /* CustomButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +129,7 @@
 		DDE4EC8C2BAECCDD00AEF5CF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		DDE4EC8E2BAECD6B00AEF5CF /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDE4EC912BAED08F00AEF5CF /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDE5E9E72C067C6500CCA07E /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,7 +196,6 @@
 			isa = PBXGroup;
 			children = (
 				DD7803862B9DE501007770A1 /* PhotosViewController.swift */,
-				DD293B652B6991EF00DAA167 /* FeedViewController.swift */,
 				DD293B6D2B69935500DAA167 /* InfoViewController.swift */,
 			);
 			path = Controllers;
@@ -242,6 +243,8 @@
 				DD293B6F2B6A1AA900DAA167 /* Profile */,
 				DD0B4ACC2BFF3E7D00416864 /* Controllers */,
 				DD7803822B9DD99A007770A1 /* PhotosTableViewCell.swift */,
+				DDE5E9E92C08527D00CCA07E /* FeedModule */,
+				DDE5E9E62C067C3700CCA07E /* Views */,
 				DD7803882B9DE55E007770A1 /* PhotosCollectionViewCell.swift */,
 				DD293B5C2B698F1000DAA167 /* LaunchScreen.storyboard */,
 				DD293B5A2B698F1000DAA167 /* Assets.xcassets */,
@@ -306,6 +309,22 @@
 				DDCBFE012BAE25D5002E8FA0 /* StorageServiceTests.swift */,
 			);
 			path = StorageServiceTests;
+			sourceTree = "<group>";
+		};
+		DDE5E9E62C067C3700CCA07E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DDE5E9E72C067C6500CCA07E /* CustomButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DDE5E9E92C08527D00CCA07E /* FeedModule */ = {
+			isa = PBXGroup;
+			children = (
+				DD293B652B6991EF00DAA167 /* FeedViewController.swift */,
+			);
+			path = FeedModule;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -561,6 +580,7 @@
 				DDCBFE102BAE3513002E8FA0 /* ProfileViewController.swift in Sources */,
 				DD7803872B9DE501007770A1 /* PhotosViewController.swift in Sources */,
 				DD293B662B6991EF00DAA167 /* FeedViewController.swift in Sources */,
+				DDE5E9E82C067C6500CCA07E /* CustomButton.swift in Sources */,
 				DD1712AD2B95CAE30086284A /* PostTableViewCell.swift in Sources */,
 				DD293B6E2B69935500DAA167 /* InfoViewController.swift in Sources */,
 				DD17129E2B774BF30086284A /* LogInViewController.swift in Sources */,

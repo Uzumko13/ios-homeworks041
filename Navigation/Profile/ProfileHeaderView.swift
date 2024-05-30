@@ -34,21 +34,16 @@ final class ProfileHeaderView: UITableViewHeaderFooterView {
         
         return statusTextField
     }()
-    lazy var statusButton: UIButton = {
-        let btn = UIButton()
-        btn.backgroundColor = UIColor(named: "VkColor")
-        btn.setTitle("Установить статус", for: .normal)
-        btn.setTitleColor(.white, for: .normal)
-        btn.layer.cornerRadius = 4
-        btn.layer.shadowOffset = CGSize(width: 4, height: 4)
-        btn.layer.shadowRadius = 4
-        btn.layer.shadowColor = UIColor.black.cgColor
-        btn.layer.shadowOpacity = 0.7
-        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        btn.addTarget(self, action: #selector(statusButtonPressed), for: .touchUpInside)
-        btn.translatesAutoresizingMaskIntoConstraints = false
-            
-        return btn
+    
+    lazy var statusButton: CustomButton = {
+        let statusBtn = CustomButton(titleText: "Установить статус", titleColor: .white, backgroundColor: UIColor(named: "VkColor")!, tapAction: self.statusButtonPressed)
+        statusBtn.layer.cornerRadius = 4
+        statusBtn.layer.shadowOffset = CGSize(width: 4, height: 4)
+        statusBtn.layer.shadowRadius = 4
+        statusBtn.layer.shadowColor = UIColor.black.cgColor
+        statusBtn.layer.shadowOpacity = 0.7
+        statusBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        return statusBtn
     }()
     
     var avatar: UIImageView = {

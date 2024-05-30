@@ -86,18 +86,14 @@ final class LogInViewController: UIViewController {
         return password
     }()
     
-    var logInButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
+    var logInButton: CustomButton = {
+        let button = CustomButton(titleText: "Log In", titleColor: .white, backgroundColor: .white, tapAction: nil)
         if let bluePixel = UIImage(named: "blue_pixel") {
             button.setBackgroundImage(bluePixel.image(alpha: 1), for: .normal)
             button.setBackgroundImage(bluePixel.image(alpha: 0.8), for: .selected)
             button.setBackgroundImage(bluePixel.image(alpha: 0.8), for: .highlighted)
             button.setBackgroundImage(bluePixel.image(alpha: 0.8), for: .disabled)
         }
-        button.setTitle("Log In", for: .normal)
-        button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = LayoutConstants.cornerRadius
         button.addTarget(nil, action: #selector(tapLoginButton), for: .touchUpInside)
         button.clipsToBounds = true
