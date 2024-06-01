@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                                         image: UIImage(systemName: "person"),
                                                         selectedImage: UIImage(systemName: "person.fill"))
         
-        let feedViewController = FeedViewController()
+        let feedViewController = FeedViewController(viewModel: FeedModel())
         feedViewController.title = "Лента"
         let feedNavigationController = UINavigationController(rootViewController: feedViewController)
         feedNavigationController.tabBarItem = UITabBarItem(title: "Лента",
