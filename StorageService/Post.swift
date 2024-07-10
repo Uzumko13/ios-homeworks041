@@ -1,4 +1,7 @@
 
+
+import Foundation
+
 public struct Post {
     
     public let author: String

@@ -1,6 +1,5 @@
 import UIKit
 import iOSIntPackage
-//Unexpected input file: /Users/uzumko/Desktop/Home Work Interface App/Navigation/DEBUG
 
 final class ProfileViewController: UIViewController {
     
@@ -24,8 +23,6 @@ final class ProfileViewController: UIViewController {
         
         return table
     }()
-    
-    
     
     // MARK: - Init
     

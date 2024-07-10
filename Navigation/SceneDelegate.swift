@@ -28,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                                      image: UIImage(systemName: "newspaper"),
                                                      selectedImage: UIImage(systemName: "newspaper.fill"))
         
-        let tabBarController = UITabBarController()
+        let tabBarController = TabBarController()
         tabBarController.tabBar.backgroundColor = .white
         tabBarController.viewControllers = [profileNavigationController, feedNavigationController]
         
