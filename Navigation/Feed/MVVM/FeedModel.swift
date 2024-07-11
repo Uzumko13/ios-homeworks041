@@ -17,7 +17,7 @@ final class FeedModel {
     private let secretWord = "Какой-то пароль"
     
     func check(input: String, completion: @escaping (Result<Bool, Error>) -> Void){
-        DispatchQueue.global().asyncAfter(deadline: .now() + 3, execute: { [weak self] in
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1.5, execute: { [weak self] in
             guard let self else { return }
             completion(.success(input == secretWord))
         })

@@ -14,18 +14,18 @@ class FeedViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private lazy var buttonOne: CustomButton = {
-        let button = CustomButton(titleText: "Открыть пост", titleColor: .systemBlue, backgroundColor: .systemBlue){
-            self.viewModel.fetchPost()
-        }
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
     private let activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .medium)
         indicator.translatesAutoresizingMaskIntoConstraints = false
         return indicator
+    }()
+    
+    private lazy var buttonOne: CustomButton = {
+        let button = CustomButton(titleText: "Открыть пост", titleColor: .white, backgroundColor: .blue){
+            self.viewModel.fetchPost()
+        }
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     private var secretWordTextField: UITextField = {
@@ -61,23 +61,11 @@ class FeedViewController: UIViewController {
             return button
         }
         
-        var resultLabel: UILabel = {
-            let resultLabel = UILabel()
-            resultLabel.font = UIFont.boldSystemFont(ofSize: 10)
-            resultLabel.numberOfLines = 0
-            resultLabel.textColor = .black
-            resultLabel.backgroundColor = .systemGray3
-            resultLabel.textAlignment = .center
-            resultLabel.alpha = 0
-            
-            resultLabel.layer.cornerRadius = 20
-            resultLabel.layer.borderWidth = 1
-            resultLabel.layer.borderColor = UIColor.black.cgColor
-            resultLabel.layer.masksToBounds = true
-            
-            resultLabel.translatesAutoresizingMaskIntoConstraints = false
-            return resultLabel
-        }()
+    private lazy var checkGuessLabel: UILabel = {
+        let lable = UILabel()
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        return lable
+    }()
     
     private lazy var stackView: UIStackView = { [unowned self] in
         let stackView = UIStackView()
@@ -85,11 +73,9 @@ class FeedViewController: UIViewController {
         stackView.axis = .vertical
         stackView.spacing = 10.0
         stackView.addArrangedSubview(self.buttonOne)
-        
         stackView.addArrangedSubview(self.secretWordTextField)
         stackView.addArrangedSubview(self.checkGuessButton)
-        stackView.addArrangedSubview(self.resultLabel)
-        
+        stackView.addArrangedSubview(self.checkGuessLabel)
         
         return stackView
     }()
@@ -134,31 +120,21 @@ class FeedViewController: UIViewController {
                     activityIndicator.isHidden = true
                     activityIndicator.stopAnimating()
                     stackView.isHidden = false
-                    if(isSuccess){
-//                        self.resultLabel.textColor = .green
-//                        self.resultLabel.text = "success"
-                        self.resultLabel.target(forAction: #selector(trueSelector), withSender: nil)
-                    }else{
-//                        self.resultLabel.textColor = .red
-//                        self.resultLabel.text = "failed"
-                        self.resultLabel.target(forAction: #selector(falseSelector), withSender: nil)
+                    if (isSuccess) {
+                        self.checkGuessLabel.textColor = .green
+                        self.checkGuessLabel.text = "success"
+                    } else {
+                        self.checkGuessLabel.textColor = .red
+                        self.checkGuessLabel.text = "failed"
                     }
                 }
             }
         }
     }
     
-        private func setup() {
-            
-            view.backgroundColor = .systemGray3
-            
-//            view.addSubviews(
-//                checkGuessButton,
-//                secretWordTextField,
-//                resultLabel
-//            )
-            
-            let safeAreaGuide = view.safeAreaLayoutGuide
+    private func setup() {
+        let safeAreaGuide = view.safeAreaLayoutGuide
+        
             NSLayoutConstraint.activate([
                 stackView.centerXAnchor.constraint(equalTo: safeAreaGuide.centerXAnchor),
                 stackView.centerYAnchor.constraint(equalTo: safeAreaGuide.centerYAnchor),
@@ -166,39 +142,7 @@ class FeedViewController: UIViewController {
                 activityIndicator.centerXAnchor.constraint(equalTo: safeAreaGuide.centerXAnchor),
                 activityIndicator.centerYAnchor.constraint(equalTo: safeAreaGuide.centerYAnchor)
             ])
-        }
-            
-//            NSLayoutConstraint.activate([
-//                
-//                checkGuessButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-//                checkGuessButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -50),
-//                checkGuessButton.widthAnchor.constraint(equalToConstant: 100),
-//                
-//                secretWordTextField.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-//                secretWordTextField.centerYAnchor.constraint(equalTo: checkGuessButton.topAnchor, constant: -40),
-//                secretWordTextField.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.75),
-//                secretWordTextField.heightAnchor.constraint(equalToConstant: 40),
-//                
-//                resultLabel.centerXAnchor.constraint(equalTo: secretWordTextField.centerXAnchor),
-//                resultLabel.centerYAnchor.constraint(equalTo: secretWordTextField.centerYAnchor),
-//                resultLabel.heightAnchor.constraint(equalToConstant: 80),
-//                resultLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25)
-//                
-//            ])
-//
-//
-//        private func actionSetStatusButtonPressed() {
-//            secretWordTextField.endEditing(true)
-//            
-//            if secretWordTextField.text != nil && secretWordTextField.text?.count != 0 {
-//                print("Password sent to server")
-//                viewModel.check(input: secretWordTextField.text!)
-//            }
-//        }
-        
-        //    private func secretWordTextFieldChanged(_: String) {
-        //        print("Some password has been typed")
-        //    }
+    }
     
     func routeToPostViewController(post: Post) {
         let postViewController = PostViewController()
@@ -209,142 +153,5 @@ class FeedViewController: UIViewController {
         
     }
         
-        @objc func trueSelector() {
-            print("Password is true")
-            
-            resultLabel.text = "Ты молодец!"
-            resultLabel.textColor = .green
-            resultLabel.layer.borderColor = UIColor.green.cgColor
-            
-            resultAnimation()
-        }
-        
-        @objc func falseSelector() {
-            print("Password is false")
-            
-            resultLabel.text = "Неправильно! Пробовать снова."
-            resultLabel.textColor = .red
-            
-            resultLabel.layer.borderColor = UIColor.red.cgColor
-            
-            resultAnimation()
-        }
-        
-        //     MARK: - Animations
-        
-        func resultAnimation() {
-            
-            // Appering animation
-            
-            let xScaleAppearAnimation = CABasicAnimation(keyPath: "transform.scale.x")
-            xScaleAppearAnimation.fromValue = 1
-            xScaleAppearAnimation.toValue = 2
-            
-            let yScaleAppearAnimation = CABasicAnimation(keyPath: "transform.scale.y")
-            yScaleAppearAnimation.fromValue = 1
-            yScaleAppearAnimation.toValue = 2
-            
-            let resultAppearAlphaAnimation = CABasicAnimation(keyPath: "opacity")
-            resultAppearAlphaAnimation.fromValue = 0
-            resultAppearAlphaAnimation.toValue = 1
-            
-            let appearGroupForResult = CAAnimationGroup()
-            appearGroupForResult.animations = [xScaleAppearAnimation, yScaleAppearAnimation, resultAppearAlphaAnimation]
-            
-            appearGroupForResult.duration = 0.25
-            appearGroupForResult.isRemovedOnCompletion = true
-            appearGroupForResult.fillMode = .forwards
-            
-            resultLabel.layer.add(appearGroupForResult, forKey: "result appear animation")
-            
-            let backgroundAppearAlphaAnimation = CABasicAnimation(keyPath: "opacity")
-            backgroundAppearAlphaAnimation.fromValue = 0
-            backgroundAppearAlphaAnimation.toValue = 0.5
-            
-            let appearGroupForBackground = CAAnimationGroup()
-            appearGroupForBackground.animations = [backgroundAppearAlphaAnimation]
-            
-            appearGroupForBackground.duration = 0.25
-            appearGroupForBackground.isRemovedOnCompletion = true
-            appearGroupForBackground.fillMode = .forwards
-            
-            stackView.layer.add(appearGroupForBackground, forKey: "background appear animation")
-            
-            // Static animation
-            let xScaleShowAnimation = CABasicAnimation(keyPath: "transform.scale.x")
-            xScaleShowAnimation.fromValue = 2
-            xScaleShowAnimation.toValue = 2
-            
-            let yScaleShowAnimation = CABasicAnimation(keyPath: "transform.scale.y")
-            yScaleShowAnimation.fromValue = 2
-            yScaleShowAnimation.toValue = 2
-            
-            let resultShowAlphaAnimation = CABasicAnimation(keyPath: "opacity")
-            resultShowAlphaAnimation.fromValue = 1
-            resultShowAlphaAnimation.toValue = 1
-            
-            let showGroupForResult = CAAnimationGroup()
-            showGroupForResult.animations = [xScaleShowAnimation, yScaleShowAnimation, resultShowAlphaAnimation]
-            
-            showGroupForResult.beginTime = CACurrentMediaTime() + 0.25
-            showGroupForResult.duration = 0.5
-            showGroupForResult.isRemovedOnCompletion = true
-            showGroupForResult.fillMode = .forwards
-            
-            resultLabel.layer.add(showGroupForResult, forKey: "result static animation")
-            
-            let backgroundShowAlphaAnimation = CABasicAnimation(keyPath: "opacity")
-            backgroundShowAlphaAnimation.fromValue = 0.5
-            backgroundShowAlphaAnimation.toValue = 0.5
-            
-            let showGroupForBackground = CAAnimationGroup()
-            showGroupForBackground.animations = [backgroundShowAlphaAnimation]
-            
-            showGroupForBackground.beginTime = CACurrentMediaTime() + 0.25
-            showGroupForBackground.duration = 0.5
-            showGroupForBackground.isRemovedOnCompletion = true
-            showGroupForBackground.fillMode = .forwards
-            
-            stackView.layer.add(showGroupForBackground, forKey: "background static animation")
-            
-            // Dissappearing animation
-            let xScaleDissappearAnimation = CABasicAnimation(keyPath: "transform.scale.x")
-            xScaleDissappearAnimation.fromValue = 2
-            xScaleDissappearAnimation.toValue = 1
-            
-            let yScaleDissappearAnimation = CABasicAnimation(keyPath: "transform.scale.y")
-            yScaleDissappearAnimation.fromValue = 2
-            yScaleDissappearAnimation.toValue = 1
-            
-            let resultDissappearAlphaAnimation = CABasicAnimation(keyPath: "opacity")
-            resultDissappearAlphaAnimation.fromValue = 1
-            resultDissappearAlphaAnimation.toValue = 0
-            
-            let dissappearGroupForResult = CAAnimationGroup()
-            dissappearGroupForResult.animations = [xScaleDissappearAnimation, yScaleDissappearAnimation, resultDissappearAlphaAnimation]
-            
-            dissappearGroupForResult.beginTime = CACurrentMediaTime() + 0.75
-            dissappearGroupForResult.duration = 0.25
-            dissappearGroupForResult.isRemovedOnCompletion = true
-            dissappearGroupForResult.fillMode = .removed
-            
-            resultLabel.layer.add(dissappearGroupForResult, forKey: "result dissappear animation")
-            
-            let backgroundDissappearAlphaAnimation = CABasicAnimation(keyPath: "opacity")
-            backgroundDissappearAlphaAnimation.fromValue = 0.5
-            backgroundDissappearAlphaAnimation.toValue = 0
-            
-            let dissappearGroupForBackground = CAAnimationGroup()
-            dissappearGroupForBackground.animations = [backgroundDissappearAlphaAnimation]
-            
-            dissappearGroupForBackground.beginTime = CACurrentMediaTime() + 0.75
-            dissappearGroupForBackground.duration = 0.25
-            dissappearGroupForBackground.isRemovedOnCompletion = true
-            dissappearGroupForBackground.fillMode = .forwards
-            
-            stackView.layer.add(dissappearGroupForBackground, forKey: "background dissappear animation")
-        }
-        
-        
-    }
+}
 
