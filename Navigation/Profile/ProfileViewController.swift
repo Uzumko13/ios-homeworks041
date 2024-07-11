@@ -1,7 +1,10 @@
 import UIKit
+import StorageService
 import iOSIntPackage
 
 final class ProfileViewController: UIViewController {
+    
+    fileprivate let data = Post.make()
     
     private let headerId = "header"
     private let postId = "post"
@@ -103,7 +106,7 @@ extension ProfileViewController: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 1
-        case 1: return postExamples.count
+        case 1: return data.count
         default:
             assertionFailure("Нет зарегистрированной секции")
             return 1
@@ -130,7 +133,7 @@ extension ProfileViewController: UITableViewDelegate {
                 withIdentifier: postId,
                 for: indexPath
             ) as! PostTableViewCell
-            cell.configPostArray(post: postExamples[indexPath.row])
+            cell.configPostArray(post: data[indexPath.row])
             return cell
         default:
             assertionFailure("Нет зарегистрированной секции")

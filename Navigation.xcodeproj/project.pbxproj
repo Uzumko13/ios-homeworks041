@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		62087052EDF81105032631B6 /* Pods_StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45AA8D1F2CF8FD860D74010E /* Pods_StorageService.framework */; };
 		96DA9C8E58BE9B7E4F6BD114 /* Pods_StorageService_StorageServiceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2E946682F81BCD57D8B016B /* Pods_StorageService_StorageServiceTests.framework */; };
 		DD17129E2B774BF30086284A /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD17129D2B774BF30086284A /* LogInViewController.swift */; };
 		DD1712A12B77B8A80086284A /* ExtentionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1712A02B77B8A80086284A /* ExtentionUIImage.swift */; };
@@ -24,6 +23,10 @@
 		DD293B712B6A1AD900DAA167 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD293B702B6A1AD900DAA167 /* ProfileHeaderView.swift */; };
 		DD48BB6F2BD0EA5B002F1680 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD48BB6E2BD0EA5B002F1680 /* Checker.swift */; };
 		DD48BB712BD57CFD002F1680 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = DD48BB702BD57CFD002F1680 /* iOSIntPackage */; };
+		DD54D9542C3FB86D0057B9F4 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD54D9532C3FB86D0057B9F4 /* PostService.swift */; };
+		DD54D9552C3FFEAD0057B9F4 /* Pods_StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45AA8D1F2CF8FD860D74010E /* Pods_StorageService.framework */; };
+		DD54D9582C40063C0057B9F4 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCBFDF12BAE25D5002E8FA0 /* StorageService.framework */; };
+		DD54D95B2C4006590057B9F4 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCBFDF12BAE25D5002E8FA0 /* StorageService.framework */; };
 		DD7803832B9DD99A007770A1 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7803822B9DD99A007770A1 /* PhotosTableViewCell.swift */; };
 		DD7803852B9DE204007770A1 /* PhotoExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7803842B9DE204007770A1 /* PhotoExamples.swift */; };
 		DD7803872B9DE501007770A1 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7803862B9DE501007770A1 /* PhotosViewController.swift */; };
@@ -32,7 +35,6 @@
 		DDB51DFB2BB0B6F00000EB10 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB51DFA2BB0B6F00000EB10 /* CurrentUserService.swift */; };
 		DDB51E002BB2B78D0000EB10 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB51DFF2BB2B78D0000EB10 /* TestUserService.swift */; };
 		DDCBFDF52BAE25D5002E8FA0 /* StorageService.docc in Sources */ = {isa = PBXBuildFile; fileRef = DDCBFDF42BAE25D5002E8FA0 /* StorageService.docc */; };
-		DDCBFDFB2BAE25D5002E8FA0 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCBFDF12BAE25D5002E8FA0 /* StorageService.framework */; };
 		DDCBFE022BAE25D5002E8FA0 /* StorageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCBFE012BAE25D5002E8FA0 /* StorageServiceTests.swift */; };
 		DDCBFE032BAE25D5002E8FA0 /* StorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = DDCBFDF32BAE25D5002E8FA0 /* StorageService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DDCBFE062BAE25D5002E8FA0 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCBFDF12BAE25D5002E8FA0 /* StorageService.framework */; };
@@ -50,10 +52,16 @@
 		DDE5E9FC2C1C122000CCA07E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE5E9FB2C1C122000CCA07E /* TabBarController.swift */; };
 		DDE5EA022C216EA700CCA07E /* MVVMProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE5EA012C216EA700CCA07E /* MVVMProtocol.swift */; };
 		DDE5EA072C23817200CCA07E /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE5EA062C23817200CCA07E /* FeedViewModel.swift */; };
-		DDE5EA0A2C28C1C800CCA07E /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE5EA092C28C1C800CCA07E /* FeedView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		DD54D95C2C4006590057B9F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DD293B462B698F0F00DAA167 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DDCBFDF02BAE25D5002E8FA0;
+			remoteInfo = StorageService;
+		};
 		DDCBFDFC2BAE25D5002E8FA0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DD293B462B698F0F00DAA167 /* Project object */;
@@ -120,6 +128,7 @@
 		DD293B6D2B69935500DAA167 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		DD293B702B6A1AD900DAA167 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		DD48BB6E2BD0EA5B002F1680 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
+		DD54D9532C3FB86D0057B9F4 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		DD7803822B9DD99A007770A1 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		DD7803842B9DE204007770A1 /* PhotoExamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoExamples.swift; sourceTree = "<group>"; };
 		DD7803862B9DE501007770A1 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
@@ -143,7 +152,6 @@
 		DDE5E9FB2C1C122000CCA07E /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		DDE5EA012C216EA700CCA07E /* MVVMProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVMProtocol.swift; sourceTree = "<group>"; };
 		DDE5EA062C23817200CCA07E /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
-		DDE5EA092C28C1C800CCA07E /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,8 +170,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD48BB712BD57CFD002F1680 /* iOSIntPackage in Frameworks */,
-				62087052EDF81105032631B6 /* Pods_StorageService.framework in Frameworks */,
 				DDE4EC8D2BAECCDD00AEF5CF /* Foundation.framework in Frameworks */,
+				DD54D9552C3FFEAD0057B9F4 /* Pods_StorageService.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,7 +179,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDCBFDFB2BAE25D5002E8FA0 /* StorageService.framework in Frameworks */,
+				DD54D95B2C4006590057B9F4 /* StorageService.framework in Frameworks */,
+				DD54D9582C40063C0057B9F4 /* StorageService.framework in Frameworks */,
 				96DA9C8E58BE9B7E4F6BD114 /* Pods_StorageService_StorageServiceTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,6 +313,7 @@
 				DDB51DF82BB0AD690000EB10 /* User.swift */,
 				DDB51DFA2BB0B6F00000EB10 /* CurrentUserService.swift */,
 				DDB51DFF2BB2B78D0000EB10 /* TestUserService.swift */,
+				DD54D9532C3FB86D0057B9F4 /* PostService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -358,7 +368,6 @@
 			children = (
 				DDE5EA012C216EA700CCA07E /* MVVMProtocol.swift */,
 				DDE5EA062C23817200CCA07E /* FeedViewModel.swift */,
-				DDE5EA092C28C1C800CCA07E /* FeedView.swift */,
 				DDE5E9EC2C0877F200CCA07E /* FeedModel.swift */,
 			);
 			path = MVVM;
@@ -438,6 +447,7 @@
 			dependencies = (
 				DDCBFDFD2BAE25D5002E8FA0 /* PBXTargetDependency */,
 				DDCBFDFF2BAE25D5002E8FA0 /* PBXTargetDependency */,
+				DD54D95D2C4006590057B9F4 /* PBXTargetDependency */,
 			);
 			name = StorageServiceTests;
 			productName = StorageServiceTests;
@@ -606,7 +616,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDE5EA0A2C28C1C800CCA07E /* FeedView.swift in Sources */,
 				DD293B6A2B69929700DAA167 /* PostViewController.swift in Sources */,
 				DD7803852B9DE204007770A1 /* PhotoExamples.swift in Sources */,
 				DD293B522B698F0F00DAA167 /* AppDelegate.swift in Sources */,
@@ -630,6 +639,7 @@
 				DD1712A12B77B8A80086284A /* ExtentionUIImage.swift in Sources */,
 				DDB51DF92BB0AD690000EB10 /* User.swift in Sources */,
 				DD293B542B698F0F00DAA167 /* SceneDelegate.swift in Sources */,
+				DD54D9542C3FB86D0057B9F4 /* PostService.swift in Sources */,
 				DD7803892B9DE55E007770A1 /* PhotosCollectionViewCell.swift in Sources */,
 				DD48BB6F2BD0EA5B002F1680 /* Checker.swift in Sources */,
 				DD1712AB2B93C7280086284A /* PostExamples.swift in Sources */,
@@ -657,6 +667,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		DD54D95D2C4006590057B9F4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DDCBFDF02BAE25D5002E8FA0 /* StorageService */;
+			targetProxy = DD54D95C2C4006590057B9F4 /* PBXContainerItemProxy */;
+		};
 		DDCBFDFD2BAE25D5002E8FA0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DDCBFDF02BAE25D5002E8FA0 /* StorageService */;

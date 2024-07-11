@@ -9,25 +9,52 @@ import UIKit
 
 final class FeedViewModel: FeedViewOutput {
     
+    private let feedModel: FeedModel
     
-    var state: State
+    private let postService: PostService
+    
+    var state: State = .initial {
+        didSet {
+            print(state)
+            currentState?(state)
+        }
+    }
+    
+    init(feedModel: FeedModel, postService: PostService) {
+        self.feedModel = feedModel
+        self.postService = postService
+    }
     
     var currentState: ((State) -> Void)?
     
-    func check(input: String) {
-        <#code#>
-    }
-    
     func fetchPost() {
-        <#code#>
+        state = .loading
+        postService.fetchPost { [weak self] result in
+            guard let self else { return }
+            switch result {
+                case .success(let post):
+                    state = .loadedPost(post)
+                case .failure(_):
+                    state = .error
+            }
+        }
+    }
+    
+    func check(input: String) {
+            state = .loading
+            feedModel.check(input: input) { [weak self] result in
+                guard let self else { return }
+                switch result {
+                    case .success(let isSuccess):
+                        state = .loadedCheck(isSuccess)
+                    case .failure(_):
+                        state = .error
+                }
+            }
     }
     
     
-    private let feedModel: FeedModel
     
-    init(model: FeedModel) {
-        self.feedModel = model
-    }
     
 //    func validateSecretWord(word: String, completion: @escaping (String) -> Void) {
 //        var message: String = ""

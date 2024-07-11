@@ -14,8 +14,18 @@ enum SecretWordError: Error {
 
 final class FeedModel {
     
+    private let secretWord = "Какой-то пароль"
+    
+    func check(input: String, completion: @escaping (Result<Bool, Error>) -> Void){
+        DispatchQueue.global().asyncAfter(deadline: .now() + 3, execute: { [weak self] in
+            guard let self else { return }
+            completion(.success(input == secretWord))
+        })
+       
+    }
+    
 //    let notificationCenter = NotificationCenter.default
-    private let secretWord: String = "Какой-то пароль"
+//    private let secretWord: String = "Какой-то пароль"
     
 //    init() {}
     
@@ -26,32 +36,16 @@ final class FeedModel {
 //         })
 //        
 //     }
-    
-    func check(word: String, completion: @escaping (Result<String, SecretWordError>) -> Void) {
-        
-        if word == secretWord {
-            completion(.success("Correct!"))
-        } else if word.isEmpty {
-            completion(.failure(.isEmpty))
-        } else {
-            completion(.failure(.incorrect))
-        }
-    }
-    
-//    func check(word: String) {
-//        
-//        var notification = Notification(
-//            name: NSNotification.Name(rawValue: "Clear notification"),
-//            object: nil,
-//            userInfo: nil)
+//    
+//    func check(word: String, completion: @escaping (Result<String, SecretWordError>) -> Void) {
 //        
 //        if word == secretWord {
-//            notification.name = NSNotification.Name(rawValue: "Word is correct")
+//            completion(.success("Correct!"))
+//        } else if word.isEmpty {
+//            completion(.failure(.isEmpty))
 //        } else {
-//            notification.name = NSNotification.Name(rawValue: "Word is not correct")
+//            completion(.failure(.incorrect))
 //        }
-//        
-//        notificationCenter.post(notification)
 //    }
     
 
