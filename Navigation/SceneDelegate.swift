@@ -3,6 +3,8 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+    private let logDelegate = MyLogInFactory()
 
     func scene(
         _ scene: UIScene,
@@ -13,35 +15,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: scene)
         
-        let feedViewController = FeedViewController()
-        feedViewController.title = "Лента"
-        let profileViewController = ProfileViewController()
-        profileViewController.title = "Профиль"
-        let postViewController = PostViewController()
-        
-        _ = UINavigationController(rootViewController: feedViewController)
-        _ = UINavigationController(rootViewController: profileViewController)
-        _ = UINavigationController(rootViewController: postViewController)
-
-        let tabBarController = UITabBarController()
-        
-        let controllers = [feedViewController,
-                           profileViewController]
-        tabBarController.viewControllers = controllers.map {
-            UINavigationController(rootViewController: $0)
-        }
-        tabBarController.selectedIndex = 0
-        
-        feedViewController.tabBarItem = UITabBarItem(title: "Лента",
-                                                     image: UIImage(systemName: "newspaper"),
-                                                     tag: 0)
-        profileViewController.tabBarItem = UITabBarItem(title: "Профиль",
+        let loginViewController = LogInViewController()
+        let profileNavigationController = UINavigationController(rootViewController: loginViewController)
+        profileNavigationController.tabBarItem = UITabBarItem(title: "Профиль",
                                                         image: UIImage(systemName: "person"),
-                                                        tag: 1)
-        tabBarController.tabBar.isTranslucent = false
-        tabBarController.tabBar.tintColor = UIColor(red: 0.6, green: 0.5, blue: 0.5, alpha: 1)
-        tabBarController.tabBar.unselectedItemTintColor = UIColor(red: 0.5, green: 0.6, blue: 0.5, alpha: 1)
-        tabBarController.tabBar.backgroundColor = UIColor(white: 1, alpha: 0.9)
+                                                        selectedImage: UIImage(systemName: "person.fill"))
+        
+        let feedModel = FeedModel()
+        let postService = PostService()
+        let feedViewModel = FeedViewModel(feedModel: feedModel, postService: postService)
+        
+        let feedViewController = FeedViewController(viewModel: feedViewModel)
+        feedViewController.title = "Лента"
+        let feedNavigationController = UINavigationController(rootViewController: feedViewController)
+        feedNavigationController.tabBarItem = UITabBarItem(title: "Лента",
+                                                     image: UIImage(systemName: "newspaper"),
+                                                     selectedImage: UIImage(systemName: "newspaper.fill"))
+        
+        let tabBarController = TabBarController()
+        tabBarController.tabBar.backgroundColor = .white
+        tabBarController.viewControllers = [profileNavigationController, feedNavigationController]
+        
+        loginViewController.loginDelegate = logDelegate.makeLoginInspector()
         
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
